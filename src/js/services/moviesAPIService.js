@@ -40,21 +40,21 @@ export default class MoviesApiService {
     this.page += 1;
   }
 
-//    get page() {
-//     return this.page;
-//   }
+  get pageMovie() {
+    return this.page;
+  }
 
-//   set page(pageNumber) {
-//    this.page = pageNumber;
-//  }
+  set pageMovie(pageNumber) {
+    this.page = pageNumber;
+  }
 
-  // get query() {
-  //   return this.query;
-  //  }
+  get searchQuery() {
+    return this.query;
+  }
 
-  // set query(newQuery) {
-  //    this.query = newQuery;
-  // }
+  set searchQuery(newQuery) {
+    this.query = newQuery;
+  }
 }
 
 

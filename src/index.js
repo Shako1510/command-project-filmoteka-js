@@ -3,20 +3,25 @@ import MoviesApiService from './js/services/moviesAPIService'
 const moviesApiService = new MoviesApiService()
 console.log(moviesApiService)
 
-async function testAPI () {
+async function testAPI() {
     try {
         const trendingMovies = await moviesApiService.fetchTrendingMovies()
         console.log(trendingMovies)
 
-     const movieDetails = await moviesApiService.fetchMovieDetails(539681)
-     console.log(movieDetails)
+        const movieDetails = await moviesApiService.fetchMovieDetails(539681)
+        console.log(movieDetails)
 
-     const movieByQuert = await moviesApiService.fetchMoviesByQuery('Lion')
-     console.log(movieByQuert)
+        const movieByQuert = await moviesApiService.fetchMoviesByQuery('Lion')
+        console.log(movieByQuert)
 
-    } catch  (error) {
+    } catch (error) {
         console.log(error);
-}
+    }
 }
 
-testAPI ()
+testAPI()
+
+
+moviesApiService.pageMovie = 2;
+
+console.log(moviesApiService.pageMovie);
