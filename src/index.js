@@ -1,4 +1,5 @@
 import MoviesApiService from './js/services/moviesAPIService'
+import "./partials/main-section"
 
 const moviesApiService = new MoviesApiService()
 console.log(moviesApiService)
@@ -25,5 +26,3 @@ testAPI()
 moviesApiService.pageMovie = 2;
 
 console.log(moviesApiService.pageMovie);
-
-import "./partials/main-section"
