@@ -1,0 +1,76 @@
+.section {
+    background-color: #FFFFFF;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    @media screen and (min-width: $tablet) {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+}
+
+.cards {
+    @media screen and(min-width: $tablet) {
+        margin-bottom: -32px;
+        margin-right: -32px;
+        }
+    }
+
+
+.cards-position {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    // justify-content: space-between;
+}
+
+.movie__item {
+    margin-bottom: 20px;
+    @media screen and (min-width: $tablet) {
+        flex-basis: calc(100% / 2 - 32px);
+        margin-right: 32px;
+        margin-bottom: 32px;
+        }
+
+    @media screen and(min-width:$desktop) {
+        flex-basis: calc(100% / 3 - 32px);
+        // margin-right: 24px;
+        }
+}
+
+// .movie__item:nth-child(3n + 3) {
+//     margin-right: 0px;
+// }
+
+.movie-info {
+    margin-top: 12px;
+}
+
+.movie__link {
+    text-decoration: none;
+}
+
+.movie-title {
+    margin: 0px;
+    font-family: $mainFont;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.2;
+    color: #000000;
+    @media screen and (min-width: $tablet) { 
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+}
+
+.movie-genre {
+    font-family: $mainFont;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.2;
+    color: #FF6B08;
+    @media screen and (min-width:$tablet) {
+        font-size: 20px;
+    }
+}
