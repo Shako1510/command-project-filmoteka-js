@@ -30,9 +30,12 @@ console.log(moviesApiService);
 // console.log(moviesApiService.pageMovie);
 
 // initialisation pagination section
-const pagination = new PaginationHandler();
+const pagination = new PaginationHandler(
+  15,
+  document.querySelector('.pagination__root')
+);
 
-pagination.initPagination(document.querySelector('.pagination__root'));
+pagination.initPagination();
 
 // adding listener of choosing page by pagination
 
