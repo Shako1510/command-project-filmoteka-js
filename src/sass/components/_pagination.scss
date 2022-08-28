@@ -10,7 +10,7 @@
     display: block;
     position: relative;
     overflow: hidden;
-    width: 220px;
+    width: 225px;
   }
 }
 
@@ -24,9 +24,6 @@
   transition-property: transform;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover {
-    transform: translatex(-45px);
-  }
 }
 
 .pagination__item {

@@ -1,11 +1,15 @@
 export class PaginationHandler {
+  rootElement = '';
   totalPages = null;
   currentPage = null;
   paginationObservers = [];
   pageItems = [0];
+  itemsCarrouselElement = '';
+  positionOfCarrousel = 0;
 
-  constructor(totalPages) {
+  constructor(totalPages, root) {
     this.totalPages = totalPages;
+    this.root = root;
   }
 
   markupPagination = () => {
@@ -37,18 +41,33 @@ export class PaginationHandler {
     </div>`;
   };
 
-  renderPagination(root) {
-    root.innerHTML = this.markupPagination();
+  renderPagination() {
+    this.root.innerHTML = this.markupPagination();
+    if (this.totalPages > 9)
+      this.itemsCarrouselElement = this.root.querySelector(
+        '.pagination__carrousel'
+      );
+    console.log('carrouselElement: ', this.itemsCarrouselElement);
   }
+
+  apdateCurrentPage = event => {
+    this.resetCurrentItem();
+    this.makeItemIsCurrent(event.target);
+    this.pageChanged(event.target.innerHTML);
+  };
+
+  moveItemsCarrousel = () => {
+    this.positionOfCarrousel += 1;
+    let step = this.positionOfCarrousel;
+    this.itemsCarrouselElement.style.transform = `translatex(-${45 * step}px)`;
+    console.log('move!');
+  };
 
   addingListenerToItems = () => {
     document.querySelectorAll('.pagination__item').forEach(item => {
       this.pageItems.push(item);
-      item.addEventListener('click', event => {
-        this.resetCurrentItem();
-        this.makeItemIsCurrent(event.target);
-        this.pageChanged(event.target.innerHTML);
-      });
+      item.addEventListener('click', this.apdateCurrentPage);
+      item.addEventListener('click', this.moveItemsCarrousel);
     });
   };
 
@@ -61,8 +80,8 @@ export class PaginationHandler {
     this.pageItems[this.currentPage].style.backgroundColor = 'tomato';
   };
 
-  initPagination = root => {
-    this.renderPagination(root);
+  initPagination = () => {
+    this.renderPagination();
     this.addingListenerToItems();
     this.makeItemIsCurrent(this.pageItems[1]);
   };
