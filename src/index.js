@@ -27,7 +27,7 @@ moviesApiService.pageMovie = 2;
 console.log(moviesApiService.pageMovie);
 
 // initialisation pagination section
-const pagination = new PaginationHandler();
+const pagination = new PaginationHandler(1);
 
 pagination.initPagination(document.querySelector('.pagination__root'));
 
