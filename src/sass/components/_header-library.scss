@@ -5,7 +5,7 @@
     max-width: $mobile;
     min-height: 230px;
   
-    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/library-header-bg-mobile.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/header-bg-lib-mobile.jpg);
     // opacity: 0.9;
     background-color: #000000;
   
@@ -16,29 +16,29 @@
     @media screen and (max-width: ($tablet - 1)) and (min-device-pixel-ratio: 2),
       screen and (max-width: ($tablet - 1)) and (min-resolution: 192dpi),
       screen and (max-width: ($tablet - 1)) and (min-resolution: 2dppx) {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/library-header-bg-mobile@2x.jpg);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/header-bg-lib-mobile@2x.jpg);
     }
   
     @media screen and (min-width: $tablet) {
       max-width: $tablet;
      
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/library-header-bg-tablet.jpg);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/header-bg-lib-tablet.jpg);
   
       @media screen and (max-width: ($desktop - 1)) and (min-device-pixel-ratio: 2),
         screen and (max-width: ($desktop - 1)) and (min-resolution: 192dpi),
         screen and (max-width: ($desktop - 1)) and (min-resolution: 2dppx) {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/library-header-bg-tablet@2x.jpg);
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/header-bg-lib-tablet@2x.jpg);
       }
     }
   
     @media screen and (min-width: $desktop) {
       max-width: $desktop;
-      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/library-header-bg-desktop.jpg);
+      background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/header-bg-lib-desktop.jpg);
   
       @media screen and (min-device-pixel-ratio: 2),
         screen and (min-resolution: 192dpi),
         screen and (min-resolution: 2dppx) {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/library-header-bg-desktop.@2x.jpg);
+        background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url(../images/header-library/header-bg-lib-desktop@2x.jpg);
       }
     }
   }
@@ -161,101 +161,71 @@
       height: 3px;
       width: 100%;
   
-      background-color: #FF6B08;
+      background-color: $accentColor;
     }
   }
   
-  .library_form {
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
+  .store {
+    display: flex;
+    justify-content: space-between;
   
-    width: 100%;
+    @media screen and (min-width: $tablet) {
+      justify-content: center;
+    }
+  }
+  
+  .store__item:first-child {
+    @media screen and (min-width: $tablet) {
+      margin-right: 15px;
+    }
+  }
+  
+  .store__btn {
+    display: block;
+  
+    padding-top: 14px;
+    padding-bottom: 12px;
+  
+    min-width: 130px;
+  
+    @media screen and (min-width: $tablet) {
+      min-width: 136px;
+    }
   
     text-align: center;
   
-    @media screen and (min-width: $tablet) {
-      width: 336px;
-    }
-  }
-  
-  .library_form-input {
-    padding-left: 1px;
-    padding-bottom: 4px;
-  
-    width: 100%;
-  
-    font-size: 14px;
-    line-height: 1.14;
-  
-    @media screen and (min-width: $tablet) {
-      width: 336px;
-    }
-  
-    background-color: transparent;
-    border: transparent;
-    border-bottom: 0.5px solid #ffff;
-  
     font-family: $mainFont;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    text-transform: uppercase;
   
     color: #ffff;
   
-    transition: border, 250ms, cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
   
-    &::placeholder {
-      color: #ffff;
+    border: 1px solid #ffff;
+    border-radius: 5px;
   
-      transition: color, 250ms, cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),  border 250ms cubic-bezier(0.4, 0, 0.2, 1);
   
-    &:focus {
-      outline: none;
-      border-bottom: 1px solid #FF6B08;
-  
-      &::placeholder {
-        color: #FF6B08;
-      }
-    }
   }
   
-  .library_form-btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-  
-    padding: 0;
-  
-    background-color: transparent;
-    border: transparent;
-  
+  .store__input:checked ~ .store__btn {
+    background-color: #FF6B01;
+    border: 1px solid #FF6B01;
     color: #ffff;
-  
-    transition: color, 250ms, cubic-bezier(0.4, 0, 0.2, 1);
-  
-    .library_form-input:focus ~ & {
-      color: #FF6B08;
-    }
   }
   
-  .library_form-warning {
-    position: absolute;
-    top: 45px;
   
-    font-size: 14px;
-    line-height: 1.17;
+  .store__input ~ .store__btn {
+    background-color: #ffff;
+    border: 1px solid #000000;
+    color: #000000;
+  }
   
-    color: $accentColor;
-  
-    @media screen and (min-width: $tablet) {
-      top: 49px;
-    }
 
-    @media screen and (min-width: $desktop) {
-        top: 45px;
-      }
-  }
-
-  .form-warning--hide{
-      display: none;
-  }
   
+  .side-nav--lib {
+    margin-bottom: 51px;
+  }

@@ -23,23 +23,36 @@
             </li>
           </ul>
         </nav>
+       
+        <form>
+          <div role="group">
+            <ul class="store">
+              <li class="store__item">
+                <label class="store__label">
+                  <input
+                    type="radio"
+                    name="store-btn"
+                    value="Watched"
+                    class="store__input visuallyhidden"
+                    checked
+                  />
+                  <span class="store__btn" id="WatchedButton">Watched</span>
+                </label>
+              </li>
+              <li class="store__item">
+                <label class="store__label">
+                  <input
+                    type="radio"
+                    name="store-btn"
+                    value="Queue"
+                    class="store__input visuallyhidden"
+                  />
+                  <span class="store__btn" id="QueueButton">Queue</span>
+                </label>
+              </li>
+            </ul>
+          </form>
 
-        <form class="library_form" id="search-form">
-         
-          <input
-          autocomplete="off"
-            type="text"
-            name="query"
-            placeholder="Movie search"
-            class="library_form-input"
-          />
-          <button type="submit" class="library_form-btn">
-            <svg class="library_form-icon" width="12" height="12">
-              <use href="./images/sprite.svg#icon-search"></use>
-            </svg>
-          </button>
-          <div class="library_form-warning form-warning--hide">Search result not successful. Enter the correct movie name and try again, please.</div>
-        </form>
       </div>
     </div>
   </header>
