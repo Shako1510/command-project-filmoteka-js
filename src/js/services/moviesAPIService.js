@@ -34,7 +34,9 @@ export default class MoviesApiService {
     const movies = await axios.get(
       `${BASE_URL}/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`
     );
+    // console.log(movies)
     return movies.data;
+
   }
 
   resetPage() {
