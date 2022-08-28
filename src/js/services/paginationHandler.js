@@ -13,7 +13,21 @@ export class PaginationHandler {
   }
 
   markupPagination = () => {
-    return `<div class="pagination__wrap">
+    if (this.totalPages <= 9) {
+      let markup = `<div class="pagination__wrap">
+              <div class="pagination__item--arrow-left"><--</div>`;
+      for (let i = 1; i <= this.totalPages; i += 1) {
+        markup =
+          markup +
+          `<div class="pagination__item pagination__item--first">${i}</div>`;
+      }
+      markup =
+        markup +
+        `<div class="pagination__item--arrow-right">--></div>
+    </div>`;
+      return markup;
+    } else {
+      return `<div class="pagination__wrap">
       <div class="pagination__item--arrow-left"><--</div>
       <div class="pagination__item pagination__item--first">1</div>
       <div class="pagination__wrap--dots">
@@ -39,15 +53,21 @@ export class PaginationHandler {
       <div class="pagination__item pagination__item--last">12</div>
       <div class="pagination__item--arrow-right">--></div>
     </div>`;
+    }
   };
 
   renderPagination() {
     this.root.innerHTML = this.markupPagination();
-    if (this.totalPages > 9)
+
+    this.addingListenerToItems();
+
+    if (this.totalPages > 9) {
       this.itemsCarrouselElement = this.root.querySelector(
         '.pagination__carrousel'
       );
-    console.log('carrouselElement: ', this.itemsCarrouselElement);
+      this.addingListenerToMoveItems();
+      console.log('carrouselElement: ', this.itemsCarrouselElement);
+    }
   }
 
   apdateCurrentPage = event => {
@@ -67,6 +87,11 @@ export class PaginationHandler {
     document.querySelectorAll('.pagination__item').forEach(item => {
       this.pageItems.push(item);
       item.addEventListener('click', this.apdateCurrentPage);
+    });
+  };
+
+  addingListenerToMoveItems = () => {
+    document.querySelectorAll('.pagination__item').forEach(item => {
       item.addEventListener('click', this.moveItemsCarrousel);
     });
   };
@@ -82,7 +107,6 @@ export class PaginationHandler {
 
   initPagination = () => {
     this.renderPagination();
-    this.addingListenerToItems();
     this.makeItemIsCurrent(this.pageItems[1]);
   };
 

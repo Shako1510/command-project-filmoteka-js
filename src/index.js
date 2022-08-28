@@ -28,7 +28,7 @@ console.log(moviesApiService.pageMovie);
 
 // initialisation pagination section
 const pagination = new PaginationHandler(
-  12,
+  15,
   document.querySelector('.pagination__root')
 );
 
