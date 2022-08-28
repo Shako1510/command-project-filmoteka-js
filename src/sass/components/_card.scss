@@ -1,0 +1,159 @@
+a {
+    text-decoration: none;
+}
+
+.collection {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
+
+    @media screen and (min-width: $mobile) {
+        width: 320px;
+    }
+
+    @media screen and (max-width: $tablet) {
+        max-width: 480px;
+    }
+
+    @media screen and (min-width: $tablet) {
+             padding-left: 32px;
+        padding-right: 32px;
+        width: 768px;
+    }
+
+    @media screen and (min-width: $desktop) {
+              padding-left: 32px;
+        padding-right: 32px;
+        width: 1300px;
+    }
+
+    &__list {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+    }
+}
+
+
+@media screen and (max-width: $tablet) {
+    .card {
+        width: 280px;
+    }
+}
+
+@media screen and (min-width: $tablet) and (max-width: $desktop) {
+    .card {
+        width: 336px;
+        margin-right: 16px;
+    }
+}
+
+@media screen and (min-width: $desktop) {
+    .card {
+        width: 395px;
+        margin-right: 16px;
+
+    }
+}
+
+
+.card {
+    box-sizing: border-box;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    height: 100%;
+
+  &__link{
+    margin: 0;
+  }
+
+
+
+    &__img {
+        // width: 395px;
+        border-radius: 5px;
+   
+        height: 574px;
+    }
+
+    &__wrap {
+   
+        // line-height: 1.67;
+    }
+
+    &__title {
+     font-family: $mainFont;
+     
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 1.2;
+         
+        
+        
+            color: #000000;
+        text-transform: uppercase;
+    }
+
+    &__data {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__genres {
+        display: inline-flex;
+        flex-wrap: wrap;
+        color: $accentColor;
+        font-family: $mainFont;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+}
+
+
+// opacity: 1;}}
+
+//         // transition: all $transition-duration $timing-function;
+
+//         &:hover,
+//         &:focus {
+//             // box-shadow: (7px -7px 21px $button-header-library);
+//             opacity: 0.9;
+//         }
+//     }
+
+
+
+
+
+//     
+//     }
+
+
+//     &__genre {
+//         margin-right: 5px;
+//     }
+
+//     &__text {
+//         ;
+//     }
+
+//     &__year {
+//         cursor: default;
+//     }
+
+//     &__year--library {
+//         margin-right: 5px;
+//     }
+
+//     &__release {
+//         // margin-left: 5px;
+//         padding: 0 10px;
+//         border-radius: 5px;
+//         background-color: $accent-color;
+//         color: $white-text-color;
+
+//         cursor: default;
+//     }
+// }

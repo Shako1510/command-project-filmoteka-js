@@ -1,30 +1,30 @@
 import MoviesApiService from './js/services/moviesAPIService';
-import './partials/main-section';
+// import './partials/main-section';
 import { PaginationHandler } from './js/services/paginationHandler';
-
+import './js/services/card';
 const moviesApiService = new MoviesApiService();
-console.log(moviesApiService);
+// console.log(moviesApiService);
 
-async function testAPI() {
-  try {
-    const trendingMovies = await moviesApiService.fetchTrendingMovies();
-    console.log(trendingMovies);
+// async function testAPI() {
+//   try {
+//     const trendingMovies = await moviesApiService.fetchTrendingMovies();
+//     console.log(trendingMovies);
 
-    const movieDetails = await moviesApiService.fetchMovieDetails(539681);
-    console.log(movieDetails);
+//     const movieDetails = await moviesApiService.fetchMovieDetails(539681);
+//     console.log(movieDetails);
 
-    const movieByQuert = await moviesApiService.fetchMoviesByQuery('Lion');
-    console.log(movieByQuert);
-  } catch (error) {
-    console.log(error);
-  }
-}
+//     const movieByQuert = await moviesApiService.fetchMoviesByQuery('Lion');
+//     console.log(movieByQuert);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
-testAPI();
+// testAPI();
 
-moviesApiService.pageMovie = 2;
+// moviesApiService.pageMovie = 2;
 
-console.log(moviesApiService.pageMovie);
+// console.log(moviesApiService.pageMovie);
 
 // initialisation pagination section
 const pagination = new PaginationHandler();
