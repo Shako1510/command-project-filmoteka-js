@@ -5,7 +5,7 @@ import { PaginationHandler } from './js/services/paginationHandler';
 import './js/services/card';
 const moviesApiService = new MoviesApiService();
 
-// console.log(moviesApiService);
+console.log(moviesApiService);
 
 // async function testAPI() {
 //   try {
