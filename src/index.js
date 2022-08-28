@@ -25,3 +25,5 @@ testAPI()
 moviesApiService.pageMovie = 2;
 
 console.log(moviesApiService.pageMovie);
+
+import "./partials/main-section"

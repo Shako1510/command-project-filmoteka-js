@@ -11,10 +11,16 @@ export default class MoviesApiService {
   }
 
   async fetchTrendingMovies() {
-    const movies = await axios.get(
+    try {
+   const movies = await axios.get(
       `${BASE_URL}/3/trending/movie/week?api_key=${API_KEY}`
     );
     return movies.data;
+
+    } catch (error) {
+        console.log(error);
+    }
+
   }
 
   async fetchMoviesByQuery(query) {
@@ -30,7 +36,6 @@ export default class MoviesApiService {
     );
     return movies.data;
   }
-
 
   resetPage() {
     this.page = 1;
