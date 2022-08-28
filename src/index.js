@@ -1,8 +1,10 @@
 import MoviesApiService from './js/services/moviesAPIService';
-// import './partials/main-section';
+import './partials/main-section';
 import { PaginationHandler } from './js/services/paginationHandler';
+
 import './js/services/card';
 const moviesApiService = new MoviesApiService();
+
 // console.log(moviesApiService);
 
 // async function testAPI() {
