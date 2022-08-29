@@ -1,27 +1,29 @@
+
+import "./js/services/modal";
 import MoviesApiService from './js/services/moviesAPIService'
 
 const moviesApiService = new MoviesApiService()
-console.log(moviesApiService)
+import MoviesApiService from './js/services/moviesAPIService';
+import './partials/main-section';
+import { PaginationHandler } from './js/services/paginationHandler';
+import inputHandler from './js/services/inputHandler'
 
-async function testAPI() {
-    try {
-        const trendingMovies = await moviesApiService.fetchTrendingMovies()
-        console.log(trendingMovies)
+import './js/services/card';
+const moviesApiService = new MoviesApiService();
 
-        const movieDetails = await moviesApiService.fetchMovieDetails(539681)
-        console.log(movieDetails)
+console.log(moviesApiService);
 
-        const movieByQuert = await moviesApiService.fetchMoviesByQuery('Lion')
-        console.log(movieByQuert)
+const pagination = new PaginationHandler(
+  15,
+  document.querySelector('.pagination__root')
+);
 
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-testAPI()
+pagination.initPagination();
 
 
-moviesApiService.pageMovie = 2;
+pagination.addEventListener('pageChanged', pageNumber =>
+  console.log('choosenPage is: ', pageNumber)
+);
 
-console.log(moviesApiService.pageMovie);
+
+// inputHandler() Анастасія - параметром сюди передайте свою функцію по рендерінгу, і має спрацювати
