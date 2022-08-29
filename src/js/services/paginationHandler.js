@@ -2,6 +2,7 @@ export class PaginationHandler {
   rootElement = '';
   totalPages = null;
   currentPage = null;
+  currentItem = '';
   previousPage = null;
   paginationObservers = [];
   pageItems = [0];
@@ -61,6 +62,7 @@ export class PaginationHandler {
     this.root.innerHTML = this.markupPagination();
 
     this.addingListenerToItems();
+    this.addingListenerToArrowButton();
 
     if (this.totalPages > 9) {
       this.itemsCarrouselElement = this.root.querySelector(
@@ -70,6 +72,22 @@ export class PaginationHandler {
       console.log('carrouselElement: ', this.itemsCarrouselElement);
     }
   }
+
+  changePageUp = () => {
+    this.resetCurrentItem();
+    this.currentItem = this.pageItems[this.currentPage + 1];
+    this.makeItemIsCurrent(this.currentItem);
+    this.moveItemsCarrousel();
+    this.pageChanged(this.currentPage);
+  };
+
+  changePageDown = () => {
+    this.resetCurrentItem();
+    this.currentItem = this.pageItems[this.currentPage - 1];
+    this.makeItemIsCurrent(this.currentItem);
+    this.moveItemsCarrousel();
+    this.pageChanged(this.currentPage);
+  };
 
   apdateCurrentPage = event => {
     this.resetCurrentItem();
@@ -172,9 +190,18 @@ export class PaginationHandler {
     });
   };
 
+  addingListenerToArrowButton = () => {
+    document
+      .querySelector('.pagination__item--arrow-left')
+      .addEventListener('click', this.changePageDown);
+    document
+      .querySelector('.pagination__item--arrow-right')
+      .addEventListener('click', this.changePageUp);
+  };
+
   makeItemIsCurrent = item => {
     this.previousPage = this.currentPage;
-    this.currentPage = item.innerHTML;
+    this.currentPage = Number(item.innerHTML);
     item.style.backgroundColor = 'yellow';
   };
 
@@ -184,7 +211,8 @@ export class PaginationHandler {
 
   initPagination = () => {
     this.renderPagination();
-    this.makeItemIsCurrent(this.pageItems[1]);
+    this.currentItem = this.pageItems[1];
+    this.makeItemIsCurrent(this.currentItem);
   };
 
   pageChanged(pageNumber) {
