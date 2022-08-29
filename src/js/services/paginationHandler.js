@@ -19,47 +19,50 @@ export class PaginationHandler {
   }
 
   markupPagination = () => {
+    let markup = '';
+
     if (this.totalPages <= 9) {
-      let markup = `<div class="pagination__wrap">
+      markup = `<div class="pagination__wrap">
               <div class="pagination__item--arrow-left"><--</div>`;
       for (let i = 1; i <= this.totalPages; i += 1) {
-        markup =
-          markup +
-          `<div class="pagination__item pagination__item--first">${i}</div>`;
+        markup = markup + `<div class="pagination__item">${i}</div>`;
       }
       markup =
         markup +
         `<div class="pagination__item--arrow-right">--></div>
     </div>`;
-      return markup;
     } else {
-      return `<div class="pagination__wrap">
+      markup = `<div class="pagination__wrap">
       <div class="pagination__item--arrow-left"><--</div>
       <div class="pagination__item pagination__item--first">1</div>
       <div class="pagination__wrap--dots">
         <div class="pagination__item pagination__item--second">2</div>
         <div class="pagination__dots pagination__dots--left invisible">...</div>
         <div class="pagination__wrap--carrousel">
-            
-            <div class="pagination__carrousel">
-            <div class="pagination__item pagination__item--carrousel">3</div>
-            <div class="pagination__item pagination__item--carrousel">4</div>
-            <div class="pagination__item pagination__item--carrousel">5</div>
-            <div class="pagination__item pagination__item--carrousel">6</div>
-            <div class="pagination__item pagination__item--carrousel">7</div>
-            <div class="pagination__item pagination__item--carrousel">8</div>
-            <div class="pagination__item pagination__item--carrousel">9</div>
-            <div class="pagination__item pagination__item--carrousel">10</div>
-            </div>
-  
+          <div class="pagination__carrousel">`;
+
+      for (let i = 3; i <= this.totalPages - 2; i += 1) {
+        markup =
+          markup +
+          `<div class="pagination__item pagination__item--carrousel">${i}</div>`;
+      }
+
+      markup =
+        markup +
+        `</div>
       </div>
       <div class="pagination__dots pagination__dots--right">...</div>
-      <div class="pagination__item pagination__item--prelast">11</div>
+      <div class="pagination__item pagination__item--prelast">${
+        this.totalPages - 1
+      }</div>
       </div>
-      <div class="pagination__item pagination__item--last">12</div>
+      <div class="pagination__item pagination__item--last">${
+        this.totalPages
+      }</div>
       <div class="pagination__item--arrow-right">--></div>
     </div>`;
     }
+    return markup;
   };
 
   renderPagination() {
@@ -99,6 +102,9 @@ export class PaginationHandler {
     } else {
       this.arrowRightElement.classList.remove('hidden');
     }
+
+    if (this.totalPages <= 9) return;
+
     if (this.currentPage > 5) {
       this.dotsLeftElement.classList.remove('invisible');
     } else {
@@ -115,7 +121,7 @@ export class PaginationHandler {
     this.resetCurrentItem();
     this.currentItem = this.pageItems[this.currentPage + 1];
     this.makeItemIsCurrent(this.currentItem);
-    this.moveItemsCarrousel();
+    if (this.totalPages > 9) this.moveItemsCarrousel();
     this.setViewPagination();
     this.pageChanged(this.currentPage);
   };
@@ -124,7 +130,7 @@ export class PaginationHandler {
     this.resetCurrentItem();
     this.currentItem = this.pageItems[this.currentPage - 1];
     this.makeItemIsCurrent(this.currentItem);
-    this.moveItemsCarrousel();
+    if (this.totalPages > 9) this.moveItemsCarrousel();
     this.setViewPagination();
     this.pageChanged(this.currentPage);
   };
