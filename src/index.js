@@ -8,6 +8,7 @@ import appendGallery from './js/services/card'
 
 
 
+
 const moviesApiService = new MoviesApiService();
 
 console.log(moviesApiService);
