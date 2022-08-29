@@ -25,4 +25,4 @@ pagination.addEventListener('pageChanged', pageNumber =>
 );
 
 // inputHandler() Анастасія - параметром сюди передайте свою функцію по рендерінгу, і має спрацювати
-inputHandler(appendGallery)
+inputHandler(appendGallery);

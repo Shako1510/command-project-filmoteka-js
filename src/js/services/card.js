@@ -49,14 +49,13 @@ function getPage(pageFromPagination) {
 export default function appendGallery(data) {
   console.log(data);
   clearContainer()
-  const markupOneCard = data.map(movie => {
-      return `
+  const markupOneCard = data.result.map(movie => {
+    return `
             <li class="collection__item">
             <div class="card">
             <a href="" class="card__link" >
-          <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${
-            movie.poster_path
-          }" alt="" ></a>
+          <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${movie.poster_path
+      }" alt="" ></a>
           <div class="card__wrap">
              <h2 class="card__title" >${movie.title}</h2>
           <div class="card__data">
@@ -73,22 +72,22 @@ export default function appendGallery(data) {
 
             </li>  
      `;
-    })
+  })
     .join('');
   gallery.insertAdjacentHTML('beforeend', markupOneCard);
 }
 
 
-export default function appendGalleryTrending (data) {
+export default function appendGalleryTrending(data) {
   console.log(data);
-  
+
   const markupOneCard = data.map(movie => {
-      return `
+    return `
             <li class="collection__item">
             <div class="card">
             <a href="" class="card__link" >
           <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${movie.poster_path
-        }" alt="" ></a>
+      }" alt="" ></a>
           <div class="card__wrap">
              <h2 class="card__title" >${movie.title}</h2>
           <div class="card__data">
@@ -105,7 +104,7 @@ export default function appendGalleryTrending (data) {
 
             </li>  
      `;
-    })
+  })
     .join('');
   gallery.insertAdjacentHTML('beforeend', markupOneCard);
 }

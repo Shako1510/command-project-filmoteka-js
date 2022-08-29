@@ -19,7 +19,7 @@ function renderCardList(data) {
 }
 
 
-const list = document.querySelector('.collection__list');
+const list = document.querySelector('.cards-position');
 const moviesApiService = new MoviesApiService()
 
 async function createMarkup() {
@@ -31,9 +31,11 @@ async function createMarkup() {
 
     list.insertAdjacentHTML('beforeend', markup);
 
+
+
   } catch (error) {
     console.error(error);
   }
 }
 
-createMarkup();
+// createMarkup();
