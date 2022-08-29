@@ -7,6 +7,10 @@ export class PaginationHandler {
   paginationObservers = [];
   pageItems = [0];
   itemsCarrouselElement = '';
+  arrowLeftElement = '';
+  arrowRightElement = '';
+  dotsLeftElement = '';
+  dotsRightElement = '';
   positionOfCarrousel = 0;
 
   constructor(totalPages, root) {
@@ -61,6 +65,13 @@ export class PaginationHandler {
   renderPagination() {
     this.root.innerHTML = this.markupPagination();
 
+    this.arrowLeftElement = this.root.querySelector(
+      '.pagination__item--arrow-left'
+    );
+    this.arrowRightElement = this.root.querySelector(
+      '.pagination__item--arrow-right'
+    );
+
     this.addingListenerToItems();
     this.addingListenerToArrowButton();
 
@@ -69,15 +80,43 @@ export class PaginationHandler {
         '.pagination__carrousel'
       );
       this.addingListenerToMoveItems();
+      this.dotsLeftElement = this.root.querySelector('.pagination__dots--left');
+      this.dotsRightElement = this.root.querySelector(
+        '.pagination__dots--right'
+      );
       console.log('carrouselElement: ', this.itemsCarrouselElement);
     }
   }
+
+  setViewPagination = () => {
+    if (this.currentPage === 1) {
+      this.arrowLeftElement.classList.add('invisible');
+    } else {
+      this.arrowLeftElement.classList.remove('invisible');
+    }
+    if (this.currentPage === this.totalPages) {
+      this.arrowRightElement.classList.add('invisible');
+    } else {
+      this.arrowRightElement.classList.remove('invisible');
+    }
+    if (this.currentPage > 5) {
+      this.dotsLeftElement.classList.remove('invisible');
+    } else {
+      this.dotsLeftElement.classList.add('invisible');
+    }
+    if (this.totalPages - this.currentPage >= 5) {
+      this.dotsRightElement.classList.remove('invisible');
+    } else {
+      this.dotsRightElement.classList.add('invisible');
+    }
+  };
 
   changePageUp = () => {
     this.resetCurrentItem();
     this.currentItem = this.pageItems[this.currentPage + 1];
     this.makeItemIsCurrent(this.currentItem);
     this.moveItemsCarrousel();
+    this.setViewPagination();
     this.pageChanged(this.currentPage);
   };
 
@@ -86,12 +125,14 @@ export class PaginationHandler {
     this.currentItem = this.pageItems[this.currentPage - 1];
     this.makeItemIsCurrent(this.currentItem);
     this.moveItemsCarrousel();
+    this.setViewPagination();
     this.pageChanged(this.currentPage);
   };
 
   apdateCurrentPage = event => {
     this.resetCurrentItem();
     this.makeItemIsCurrent(event.target);
+    this.setViewPagination();
     this.pageChanged(this.currentPage);
   };
 
@@ -191,12 +232,8 @@ export class PaginationHandler {
   };
 
   addingListenerToArrowButton = () => {
-    document
-      .querySelector('.pagination__item--arrow-left')
-      .addEventListener('click', this.changePageDown);
-    document
-      .querySelector('.pagination__item--arrow-right')
-      .addEventListener('click', this.changePageUp);
+    this.arrowLeftElement.addEventListener('click', this.changePageDown);
+    this.arrowRightElement.addEventListener('click', this.changePageUp);
   };
 
   makeItemIsCurrent = item => {
@@ -213,6 +250,7 @@ export class PaginationHandler {
     this.renderPagination();
     this.currentItem = this.pageItems[1];
     this.makeItemIsCurrent(this.currentItem);
+    this.setViewPagination();
   };
 
   pageChanged(pageNumber) {
