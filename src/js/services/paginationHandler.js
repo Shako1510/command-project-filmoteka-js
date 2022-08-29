@@ -144,12 +144,10 @@ export class PaginationHandler {
 
   calculateStep() {
     if (Number(this.currentPage) === 1) {
-      console.log('first', this.currentPage, this.totalPages);
       return (this.positionOfCarrousel = 0);
     }
 
     if (Number(this.currentPage) === this.totalPages) {
-      console.log('total', this.currentPage, this.totalPages);
       return (this.positionOfCarrousel = -(this.totalPages - 9) * 45);
     }
 
@@ -160,7 +158,6 @@ export class PaginationHandler {
             Number(this.totalPages - this.currentPage) < 4
         )
       ) {
-        console.log('no movement', this.currentPage, this.totalPages);
         return this.positionOfCarrousel;
       }
 
@@ -174,11 +171,9 @@ export class PaginationHandler {
             Number(this.totalPages - this.currentPage) <= 4
         )
       ) {
-        console.log('no movement', this.currentPage, this.totalPages);
         return this.positionOfCarrousel;
       }
 
-      console.log('<0', this.currentPage, this.totalPages);
       return (this.positionOfCarrousel += 45);
     }
 
@@ -189,11 +184,9 @@ export class PaginationHandler {
             Number(this.totalPages - this.currentPage) < 3
         )
       ) {
-        console.log('>1 no movement', this.currentPage, this.totalPages);
         return this.positionOfCarrousel;
       }
 
-      console.log('>1', this.currentPage, this.totalPages);
       return Number(this.totalPages - this.currentPage) === 6 ||
         Number(this.totalPages - this.currentPage) === 3
         ? (this.positionOfCarrousel -= 45)
@@ -207,11 +200,9 @@ export class PaginationHandler {
             Number(this.totalPages - this.currentPage) <= 4
         )
       ) {
-        console.log('<-1 no movement', this.currentPage, this.totalPages);
         return this.positionOfCarrousel;
       }
 
-      console.log('<-1', this.currentPage, this.totalPages);
       return Number(this.currentPage) === 4 ||
         Number(this.totalPages - this.currentPage) === 5
         ? (this.positionOfCarrousel += 45)
@@ -221,7 +212,6 @@ export class PaginationHandler {
 
   moveItemsCarrousel = () => {
     this.itemsCarrouselElement.style.transform = `translatex(${this.calculateStep()}px)`;
-    console.log('move!');
   };
 
   addingListenerToItems = () => {
