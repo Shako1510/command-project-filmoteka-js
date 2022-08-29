@@ -1,14 +1,12 @@
 
 import "./js/services/modal";
-import MoviesApiService from './js/services/moviesAPIService'
-
-const moviesApiService = new MoviesApiService()
 import MoviesApiService from './js/services/moviesAPIService';
 import './partials/main-section';
 import { PaginationHandler } from './js/services/paginationHandler';
 import inputHandler from './js/services/inputHandler'
-
 import './js/services/card';
+
+
 const moviesApiService = new MoviesApiService();
 
 console.log(moviesApiService);

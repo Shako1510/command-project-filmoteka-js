@@ -3,7 +3,7 @@ import MoviesApiService from '../js/services/moviesAPIService'
 function renderCardList(data) {
   const markup = data
     .map(
-      (item) =>`<li class="movie__item">
+      (item) => `<li class="movie__item">
                 <a href="" class="movie__link link">
                     <div id="${item.id}">
                         <img class="movie-cover" src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="example">
@@ -15,11 +15,11 @@ function renderCardList(data) {
                 </a>
             </li>`
     ).join("")
-    return markup;
+  return markup;
 }
 
 
-const list = document.querySelector('.cards-position');
+const list = document.querySelector('.collection__list');
 const moviesApiService = new MoviesApiService()
 
 async function createMarkup() {
@@ -31,8 +31,6 @@ async function createMarkup() {
 
     list.insertAdjacentHTML('beforeend', markup);
 
-
-   
   } catch (error) {
     console.error(error);
   }
