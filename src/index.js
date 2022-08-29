@@ -2,9 +2,14 @@ import MoviesApiService from './js/services/moviesAPIService';
 import './partials/main-section';
 import { PaginationHandler } from './js/services/paginationHandler';
 import inputHandler from './js/services/inputHandler'
+import appendGallery from './js/services/card'
+// import './js/services/card';
 
-import './js/services/card';
-const moviesApiService = new MoviesApiService();
+
+// console.log(appendGallery)
+
+// const moviesApiService = new MoviesApiService();
+
 
 // console.log(moviesApiService);
 
@@ -45,3 +50,4 @@ pagination.addEventListener('pageChanged', pageNumber =>
 
 
 // inputHandler() Анастасія - параметром сюди передайте свою функцію по рендерінгу, і має спрацювати
+inputHandler(appendGallery)
