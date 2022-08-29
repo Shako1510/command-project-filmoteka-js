@@ -8,7 +8,7 @@ const modal = document.querySelector('.modal');
 
 // Підтягування id фільму
 function makeMarkup(data) {
-  const markup = `
+    const markup = `
         <div class="modal-conteiner">
             <div class="modal-container__banner">
                 <img class="modal-container__img" src="https://image.tmdb.org/t/p/w500${data.poster_path}"
@@ -47,7 +47,8 @@ function makeMarkup(data) {
                 </div>
             </div>`;
 
-  return (modal.innerHTML = markup);
+//   return (modal.innerHTML = markup);
+    return modal.insertAdjacentHTML("beforeend", markup)
 }
 
 async function searchedData(id) {
@@ -62,34 +63,35 @@ async function searchedData(id) {
   }
 }
 
-// Відкриваємо модальне вікно при кліку на картку
-openModalDescription.addEventListener('click', evt => {
+// Додаємо слухача і відкриваємо модальне вікно при кліку на картку
+openModalDescription.addEventListener('click', onModalClick);
+function onModalClick(evt) {
   evt.preventDefault();
   if (evt.target.closest('.movie__link')) {
-    showModal.classList.remove('is-hidden');
+    window.addEventListener('keydown', onEscKeyPress);
     showModal.classList.add('is-open');
     const filmId = evt.srcElement.parentElement.id;
     searchedData(filmId);
   }
-});
-// Закриваємо модальне вікно при кліку на бекдроп
-showModal.addEventListener('click', evt => {
-  if (evt.currentTarget === evt.target) {
-    showModal.classList.remove('is-open');
-    showModal.classList.add('is-hidden');
-  }
-});
-
-// Закриття модального вікна при кліку на ESC (події клавіатури обробляються на документі, а не на конкретному елементі)
-document.addEventListener('keydown', evt => {
-  if (evt.code === 'Escape') {
-    showModal.classList.remove('is-open');
-    showModal.classList.add('is-hidden');
-  }
- 
-});
-// Закриваємо модальне вікно при кліку на кнопку
-closeBtn.addEventListener('click', () => {
+}
+function onModalClose() {
+    modal.innerHTML = "";
+  window.removeEventListener('keydown', onEscKeyPress);
   showModal.classList.remove('is-open');
-  showModal.classList.add('is-hidden');
-});
+}
+// Закриваємо модальне вікно при кліку на бекдроп
+showModal.addEventListener('click', onBackdropClick);
+function onBackdropClick(evt) {
+    if (evt.currentTarget === evt.target) {
+    onModalClose();
+  }
+}
+// Закриття модального вікна при кліку на ESC (події клавіатури обробляються на документі, а не на конкретному елементі)
+
+function onEscKeyPress(evt) {
+  if (evt.code === 'Escape') {
+    onModalClose();
+  }
+}
+// Закриваємо модальне вікно при кліку на кнопку
+closeBtn.addEventListener('click', onModalClose);
