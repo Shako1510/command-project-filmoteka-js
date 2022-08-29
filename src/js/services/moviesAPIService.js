@@ -12,7 +12,6 @@ export default class MoviesApiService {
     const movies = await axios.get(
       `${BASE_URL}/3/trending/movie/week?api_key=${API_KEY}`
     );
-    console.log(movies.data);
     localStorage.setItem('fetchedMovies', JSON.stringify(movies.data.results));
     return movies.data;
   }
@@ -59,7 +58,6 @@ export default class MoviesApiService {
     const genres = await axios.get(
       `${BASE_URL}/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
     );
-    console.log(genres);
     localStorage.setItem('genresItem', JSON.stringify(genres.data.genres));
     return genres.data;
   }

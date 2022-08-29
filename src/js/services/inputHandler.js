@@ -5,8 +5,6 @@ const moviesApiService = new MoviesApiService();
 const searchForm = document.querySelector('#search-form');
 const notification = document.querySelector('.form-warning')
 
-console.log(notification)
-
 export default function inputHandler (functionRender) {
 
 searchForm.addEventListener('submit', onFormSubmit);

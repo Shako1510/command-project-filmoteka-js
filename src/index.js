@@ -6,7 +6,7 @@ import inputHandler from './js/services/inputHandler'
 import './js/services/card';
 const moviesApiService = new MoviesApiService();
 
-console.log(moviesApiService);
+// console.log(moviesApiService);
 
 // async function testAPI() {
 //   try {

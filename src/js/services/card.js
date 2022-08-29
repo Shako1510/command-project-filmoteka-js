@@ -31,19 +31,19 @@ function getPage(pageFromPagination) {
   onSearchMovie();
 }
 
-function onSearchMovie(e) {
-  e.preventDefault();
-  clearContainer();
-  moviesApiService.query = e.currentTarget.elements.query.value;
-  moviesApiService.page = currentPage;
-  console.log(moviesApiService.query);
-  moviesApiService.resetPage();
-  moviesApiService
-    .fetchMoviesByQuery(moviesApiService.query, currentPage)
-    .then(appendGallery);
-}
+// function onSearchMovie(e) {
+//   e.preventDefault();
+//   clearContainer();
+//   moviesApiService.query = e.currentTarget.elements.query.value;
+//   moviesApiService.page = currentPage;
+//   console.log(moviesApiService.query);
+//   moviesApiService.resetPage();
+//   moviesApiService
+//     .fetchMoviesByQuery(moviesApiService.query, currentPage)
+//     .then(appendGallery);
+// }
 
-function appendGallery(data) {
+export default function appendGallery(data) {
   console.log(data);
   const markupOneCard = data.results
     .map(movie => {
