@@ -90,14 +90,14 @@ export class PaginationHandler {
 
   setViewPagination = () => {
     if (this.currentPage === 1) {
-      this.arrowLeftElement.classList.add('invisible');
+      this.arrowLeftElement.classList.add('hidden');
     } else {
-      this.arrowLeftElement.classList.remove('invisible');
+      this.arrowLeftElement.classList.remove('hidden');
     }
     if (this.currentPage === this.totalPages) {
-      this.arrowRightElement.classList.add('invisible');
+      this.arrowRightElement.classList.add('hidden');
     } else {
-      this.arrowRightElement.classList.remove('invisible');
+      this.arrowRightElement.classList.remove('hidden');
     }
     if (this.currentPage > 5) {
       this.dotsLeftElement.classList.remove('invisible');
