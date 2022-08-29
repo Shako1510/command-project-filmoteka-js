@@ -3,8 +3,9 @@ import "./js/services/modal";
 import MoviesApiService from './js/services/moviesAPIService';
 import './partials/main-section';
 import { PaginationHandler } from './js/services/paginationHandler';
-import inputHandler from './js/services/inputHandler';
-import './js/services/card';
+import inputHandler from './js/services/inputHandler'
+import appendGallery from './js/services/card'
+
 
 
 const moviesApiService = new MoviesApiService();
@@ -24,3 +25,4 @@ pagination.addEventListener('pageChanged', pageNumber =>
 );
 
 // inputHandler() Анастасія - параметром сюди передайте свою функцію по рендерінгу, і має спрацювати
+inputHandler(appendGallery)
