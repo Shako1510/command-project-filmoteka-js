@@ -1,4 +1,5 @@
 import MoviesApiService from './moviesAPIService';
+
 const moviesApiService = new MoviesApiService();
 // console.log(moviesApiService);
 
@@ -86,9 +87,8 @@ export default function appendGalleryTrending (data) {
             <li class="collection__item">
             <div class="card">
             <a href="" class="card__link" >
-          <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${
-            movie.poster_path
-          }" alt="" ></a>
+          <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${movie.poster_path
+        }" alt="" ></a>
           <div class="card__wrap">
              <h2 class="card__title" >${movie.title}</h2>
           <div class="card__data">
