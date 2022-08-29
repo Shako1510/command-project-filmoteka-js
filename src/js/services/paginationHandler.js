@@ -88,23 +88,69 @@ export class PaginationHandler {
       return (this.positionOfCarrousel = -(this.totalPages - 9) * 45);
     }
 
-    if (
-      Number(
-        this.currentPage <= 5 || Number(this.totalPages - this.currentPage) <= 4
-      )
-    ) {
-      console.log('no movement', this.currentPage, this.totalPages);
-      return this.positionOfCarrousel;
-    }
+    if (this.currentPage - this.previousPage === 1) {
+      if (
+        Number(
+          this.currentPage <= 5 ||
+            Number(this.totalPages - this.currentPage) < 4
+        )
+      ) {
+        console.log('no movement', this.currentPage, this.totalPages);
+        return this.positionOfCarrousel;
+      }
 
-    if (this.currentPage - this.previousPage > 0) {
-      console.log('>0', this.currentPage, this.totalPages);
       return (this.positionOfCarrousel -= 45);
     }
 
-    if (this.currentPage - this.previousPage < 0) {
+    if (this.currentPage - this.previousPage === -1) {
+      if (
+        Number(
+          this.currentPage < 5 ||
+            Number(this.totalPages - this.currentPage) <= 4
+        )
+      ) {
+        console.log('no movement', this.currentPage, this.totalPages);
+        return this.positionOfCarrousel;
+      }
+
       console.log('<0', this.currentPage, this.totalPages);
       return (this.positionOfCarrousel += 45);
+    }
+
+    if (this.currentPage - this.previousPage > 1) {
+      if (
+        Number(
+          this.currentPage <= 5 ||
+            Number(this.totalPages - this.currentPage) < 3
+        )
+      ) {
+        console.log('>1 no movement', this.currentPage, this.totalPages);
+        return this.positionOfCarrousel;
+      }
+
+      console.log('>1', this.currentPage, this.totalPages);
+      return Number(this.totalPages - this.currentPage) === 6 ||
+        Number(this.totalPages - this.currentPage) === 3
+        ? (this.positionOfCarrousel -= 45)
+        : (this.positionOfCarrousel -= 90);
+    }
+
+    if (this.currentPage - this.previousPage < -1) {
+      if (
+        Number(
+          this.currentPage < 4 ||
+            Number(this.totalPages - this.currentPage) <= 4
+        )
+      ) {
+        console.log('<-1 no movement', this.currentPage, this.totalPages);
+        return this.positionOfCarrousel;
+      }
+
+      console.log('<-1', this.currentPage, this.totalPages);
+      return Number(this.currentPage) === 4 ||
+        Number(this.totalPages - this.currentPage) === 5
+        ? (this.positionOfCarrousel += 45)
+        : (this.positionOfCarrousel += 90);
     }
   }
 
