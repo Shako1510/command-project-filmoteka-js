@@ -5,7 +5,7 @@ function renderCardList(data) {
     .map(
       (item) =>`<li class="movie__item">
                 <a href="" class="movie__link link">
-                    <div>
+                    <div id="${item.id}">
                         <img class="movie-cover" src="https://image.tmdb.org/t/p/w500${item.poster_path}" alt="example">
                         <div class="movie-info">
                             <h1 class="movie-title">${item.original_title}</h1>
