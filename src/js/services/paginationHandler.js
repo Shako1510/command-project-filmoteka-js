@@ -2,6 +2,7 @@ export class PaginationHandler {
   rootElement = '';
   totalPages = null;
   currentPage = null;
+  previousPage = null;
   paginationObservers = [];
   pageItems = [0];
   itemsCarrouselElement = '';
@@ -73,13 +74,42 @@ export class PaginationHandler {
   apdateCurrentPage = event => {
     this.resetCurrentItem();
     this.makeItemIsCurrent(event.target);
-    this.pageChanged(event.target.innerHTML);
+    this.pageChanged(this.currentPage);
   };
 
+  calculateStep() {
+    if (Number(this.currentPage) === 1) {
+      console.log('first', this.currentPage, this.totalPages);
+      return (this.positionOfCarrousel = 0);
+    }
+
+    if (Number(this.currentPage) === this.totalPages) {
+      console.log('total', this.currentPage, this.totalPages);
+      return (this.positionOfCarrousel = -(this.totalPages - 9) * 45);
+    }
+
+    if (
+      Number(
+        this.currentPage <= 5 || Number(this.totalPages - this.currentPage) <= 4
+      )
+    ) {
+      console.log('no movement', this.currentPage, this.totalPages);
+      return this.positionOfCarrousel;
+    }
+
+    if (this.currentPage - this.previousPage > 0) {
+      console.log('>0', this.currentPage, this.totalPages);
+      return (this.positionOfCarrousel -= 45);
+    }
+
+    if (this.currentPage - this.previousPage < 0) {
+      console.log('<0', this.currentPage, this.totalPages);
+      return (this.positionOfCarrousel += 45);
+    }
+  }
+
   moveItemsCarrousel = () => {
-    this.positionOfCarrousel += 1;
-    let step = this.positionOfCarrousel;
-    this.itemsCarrouselElement.style.transform = `translatex(-${45 * step}px)`;
+    this.itemsCarrouselElement.style.transform = `translatex(${this.calculateStep()}px)`;
     console.log('move!');
   };
 
@@ -97,6 +127,7 @@ export class PaginationHandler {
   };
 
   makeItemIsCurrent = item => {
+    this.previousPage = this.currentPage;
     this.currentPage = item.innerHTML;
     item.style.backgroundColor = 'yellow';
   };
