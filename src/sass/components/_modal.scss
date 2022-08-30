@@ -22,14 +22,14 @@
   pointer-events: auto;
   overflow: visible;
 }
-.modal {
+.modal-window {
   display: inline-block;
   box-sizing: border-box;
   position: absolute;
   top: 50%;
   left: 50%;
-  //   min-width: 280px;
-  //   max-height: 100vh;
+    // min-width: 280px;
+    // max-height: 100vh;
   background-color: #ffffff;
 
   overflow-y: auto;

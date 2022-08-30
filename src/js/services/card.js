@@ -28,6 +28,7 @@ function getPage(pageNumber) {
   console.log(currentPage);
   onSearchMovie();
 }
+
 export function getQuery(query) {
   currentQuery = query;
   console.log('getQuery', currentQuery);
@@ -48,7 +49,7 @@ export default function appendGallery(data) {
     .map(movie => {
       return `
             <li class="collection__item">
-            <div class="card">
+            <div class="card" id="${movie.id}">
             <a href="" class="card__link" >
           <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${
             movie.poster_path
