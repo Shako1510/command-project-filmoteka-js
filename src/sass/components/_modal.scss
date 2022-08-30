@@ -16,12 +16,12 @@
   overflow: hidden;
 }
 
-
 .is-open {
   opacity: 1;
   pointer-events: auto;
   overflow: visible;
 }
+
 .modal-window {
   display: inline-block;
   box-sizing: border-box;
@@ -80,6 +80,7 @@
     padding: 40px 12px;
   }
 }
+
 
 
 p {

@@ -2,7 +2,7 @@ import MoviesApiService from './moviesAPIService';
 const moviesApiService = new MoviesApiService();
 // console.log(moviesApiService);
 import { PaginationHandler } from './paginationHandler';
-console.log(PaginationHandler);
+// console.log(PaginationHandler);
 document.addEventListener('DOMContentLoaded', onTrending);
 // async function getGenres() {
 //   const genres = await moviesApiService.fetchGenres();
@@ -49,8 +49,8 @@ export default function appendGallery(data) {
     .map(movie => {
       return `
             <li class="collection__item">
-            <div class="card" id="${movie.id}">
-            <a href="" class="card__link" >
+            <div class="card">
+            <a href="" class="card__link" id="${movie.id}">
           <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${
             movie.poster_path
           }" alt="" ></a>

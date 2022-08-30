@@ -4,8 +4,6 @@ const closeButton = document.querySelector(`.close`);
 openButton.addEventListener("click", function(){
     modal.classList.add("is-active");
     modal.classList.remove("is-hidden");
-   
-    
 })
 closeButton.addEventListener("click", function(){
     modal.classList.remove("is-active");
