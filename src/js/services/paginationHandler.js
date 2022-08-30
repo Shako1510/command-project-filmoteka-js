@@ -1,9 +1,8 @@
 export class PaginationHandler {
   rootElement = '';
-  totalPages = null;
-  currentPage = null;
+  totalPages = 1;
+  currentPage = 1;
   currentItem = '';
-  previousPage = null;
   paginationObservers = [];
   pageItems = [0];
   itemsCarrouselElement = '';
@@ -13,7 +12,8 @@ export class PaginationHandler {
   dotsRightElement = '';
   positionOfCarrousel = 0;
 
-  constructor(totalPages, root) {
+  constructor(currentPage = 1, totalPages, root) {
+    this.currentPage = currentPage;
     this.totalPages = totalPages;
     this.root = root;
   }
@@ -66,6 +66,7 @@ export class PaginationHandler {
   };
 
   renderPagination() {
+    console.log('render with currentPage: ', this.currentPage);
     this.root.innerHTML = this.markupPagination();
 
     this.arrowLeftElement = this.root.querySelector(
@@ -82,12 +83,10 @@ export class PaginationHandler {
       this.itemsCarrouselElement = this.root.querySelector(
         '.pagination__carrousel'
       );
-      this.addingListenerToMoveItems();
       this.dotsLeftElement = this.root.querySelector('.pagination__dots--left');
       this.dotsRightElement = this.root.querySelector(
         '.pagination__dots--right'
       );
-      console.log('carrouselElement: ', this.itemsCarrouselElement);
     }
   }
 
@@ -119,99 +118,37 @@ export class PaginationHandler {
 
   changePageUp = () => {
     this.resetCurrentItem();
-    this.currentItem = this.pageItems[this.currentPage + 1];
+    this.currentPage += 1;
+    this.currentItem = this.pageItems[this.currentPage];
     this.makeItemIsCurrent(this.currentItem);
-    if (this.totalPages > 9) this.moveItemsCarrousel();
-    this.setViewPagination();
     this.pageChanged(this.currentPage);
   };
 
   changePageDown = () => {
     this.resetCurrentItem();
-    this.currentItem = this.pageItems[this.currentPage - 1];
+    this.currentPage -= 1;
+    this.currentItem = this.pageItems[this.currentPage];
     this.makeItemIsCurrent(this.currentItem);
-    if (this.totalPages > 9) this.moveItemsCarrousel();
-    this.setViewPagination();
     this.pageChanged(this.currentPage);
   };
 
   apdateCurrentPage = event => {
     this.resetCurrentItem();
+    this.currentPage = Number(event.target.innerHTML);
     this.makeItemIsCurrent(event.target);
     this.setViewPagination();
     this.pageChanged(this.currentPage);
   };
 
-  calculateStep() {
-    if (Number(this.currentPage) === 1) {
-      return (this.positionOfCarrousel = 0);
-    }
-
-    if (Number(this.currentPage) === this.totalPages) {
-      return (this.positionOfCarrousel = -(this.totalPages - 9) * 45);
-    }
-
-    if (this.currentPage - this.previousPage === 1) {
-      if (
-        Number(
-          this.currentPage <= 5 ||
-            Number(this.totalPages - this.currentPage) < 4
-        )
-      ) {
-        return this.positionOfCarrousel;
-      }
-
-      return (this.positionOfCarrousel -= 45);
-    }
-
-    if (this.currentPage - this.previousPage === -1) {
-      if (
-        Number(
-          this.currentPage < 5 ||
-            Number(this.totalPages - this.currentPage) <= 4
-        )
-      ) {
-        return this.positionOfCarrousel;
-      }
-
-      return (this.positionOfCarrousel += 45);
-    }
-
-    if (this.currentPage - this.previousPage > 1) {
-      if (
-        Number(
-          this.currentPage <= 5 ||
-            Number(this.totalPages - this.currentPage) < 3
-        )
-      ) {
-        return this.positionOfCarrousel;
-      }
-
-      return Number(this.totalPages - this.currentPage) === 6 ||
-        Number(this.totalPages - this.currentPage) === 3
-        ? (this.positionOfCarrousel -= 45)
-        : (this.positionOfCarrousel -= 90);
-    }
-
-    if (this.currentPage - this.previousPage < -1) {
-      if (
-        Number(
-          this.currentPage < 4 ||
-            Number(this.totalPages - this.currentPage) <= 4
-        )
-      ) {
-        return this.positionOfCarrousel;
-      }
-
-      return Number(this.currentPage) === 4 ||
-        Number(this.totalPages - this.currentPage) === 5
-        ? (this.positionOfCarrousel += 45)
-        : (this.positionOfCarrousel += 90);
-    }
-  }
+  calculateCarrouselPosition = () => {
+    if (this.currentPage < 5) return 0;
+    if (this.totalPages - this.currentPage < 4)
+      return -(this.totalPages - 9) * 45;
+    return 135 - (this.currentPage - 2) * 45;
+  };
 
   moveItemsCarrousel = () => {
-    this.itemsCarrouselElement.style.transform = `translatex(${this.calculateStep()}px)`;
+    this.itemsCarrouselElement.style.transform = `translatex(${this.calculateCarrouselPosition()}px)`;
   };
 
   addingListenerToItems = () => {
@@ -221,20 +158,12 @@ export class PaginationHandler {
     });
   };
 
-  addingListenerToMoveItems = () => {
-    document.querySelectorAll('.pagination__item').forEach(item => {
-      item.addEventListener('click', this.moveItemsCarrousel);
-    });
-  };
-
   addingListenerToArrowButton = () => {
     this.arrowLeftElement.addEventListener('click', this.changePageDown);
     this.arrowRightElement.addEventListener('click', this.changePageUp);
   };
 
   makeItemIsCurrent = item => {
-    this.previousPage = this.currentPage;
-    this.currentPage = Number(item.innerHTML);
     item.style.backgroundColor = 'yellow';
   };
 
@@ -244,15 +173,16 @@ export class PaginationHandler {
 
   initPagination = () => {
     this.renderPagination();
-    this.currentItem = this.pageItems[1];
+    this.currentItem = this.pageItems[this.currentPage];
     this.makeItemIsCurrent(this.currentItem);
+    if (this.totalPages > 9) this.moveItemsCarrousel();
     this.setViewPagination();
   };
 
-  pageChanged(pageNumber) {
+  pageChanged(currentPage) {
     for (let i = 0; i < this.paginationObservers.length; i++) {
       if (this.paginationObservers[i].eventName === 'pageChanged') {
-        this.paginationObservers[i].listener(pageNumber);
+        this.paginationObservers[i].listener(currentPage);
       }
     }
   }

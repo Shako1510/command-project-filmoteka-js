@@ -13,10 +13,11 @@ export default class MoviesApiService {
       `${BASE_URL}/3/trending/movie/week?api_key=${API_KEY}`
     );
     localStorage.setItem('fetchedMovies', JSON.stringify(movies.data.results));
-   
+
     const movieByQuert = {
       results: movies.data.results,
       totalPage: movies.data.total_pages,
+      page: movies.data.page,
     };
     return movieByQuert;
   }
@@ -26,11 +27,12 @@ export default class MoviesApiService {
       `${BASE_URL}/3/search/movie?api_key=${API_KEY}&query=${query}&language=en-US&page=${page}&include_adult=false`
     );
     localStorage.setItem('fetchedMovies', JSON.stringify(movies.data.results));
-    
     const movieByQuert = {
       results: movies.data.results,
       totalPage: movies.data.total_pages,
+      page: movies.data.page,
     };
+    console.log('result', movieByQuert);
     return movieByQuert;
   }
 
@@ -38,6 +40,7 @@ export default class MoviesApiService {
     const movies = await axios.get(
       `${BASE_URL}/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`
     );
+    // console.log(movies)
     return movies.data;
   }
 
