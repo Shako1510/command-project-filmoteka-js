@@ -22,6 +22,7 @@ const gallery = document.querySelector('.collection__list');
 // // pagination.addEventListener('pageChanged', getPage);
 // let currentPage = 1;
 let currentPage = 1;
+let currentQuery = '';
 function getPage(pageNumber) {
   console.log('getPage');
   currentPage = pageNumber;
@@ -31,14 +32,13 @@ function getPage(pageNumber) {
 export function getQuery(query) {
   currentQuery = query;
   console.log('getQuery', currentQuery);
-  onSearchMovie();
+  onSearchMovie(currentQuery);
 }
-
 function onSearchMovie() {
   clearContainer();
   //  moviesApiService.resetPage();
   moviesApiService
-    .fetchMoviesByQuery(moviesApiService.query, currentPage)
+    .fetchMoviesByQuery(currentQuery, currentPage)
     .then(appendGallery);
 }
 export default function appendGallery(data) {
@@ -48,11 +48,10 @@ export default function appendGallery(data) {
     .map(movie => {
       return `
             <li class="collection__item">
-            <div class="card">
+            <div class="card" id="${movie.id}">
             <a href="" class="card__link" >
-          <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${
-            movie.poster_path
-          }" alt="" ></a>
+          <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${movie.poster_path
+        }" alt="" ></a>
           <div class="card__wrap">
              <h2 class="card__title" >${movie.title}</h2>
           <div class="card__data">
@@ -64,9 +63,8 @@ export default function appendGallery(data) {
         <p class="card__year card__text">|${movie.release_date.slice(0, 4)} </p>
               </div>
     </div>
-    
             </div>
-            </li>  
+            </li>
      `;
     })
     .join('');
