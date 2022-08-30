@@ -33,7 +33,7 @@ searchForm.addEventListener('submit', onFormSubmit);
         searchForm.reset();
         return
       }
-      functionRender(movieByQuert.results)
+      functionRender(movieByQuert)
     } catch (error) {
       console.log(error);
     }
