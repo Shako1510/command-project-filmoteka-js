@@ -1,4 +1,20 @@
-export default localStorageAPI
+// export default localStorageAPI
+
+import fetch from './moviesAPIService';
+
+const getFilms = new fetch();
+
+async function fetchMovie(){
+  try { const data = await getFilms.fetchTrendingMovies();
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+console.log(fetchMovie());
+
+
 
 const localStorageAPI = {
     // Отримання даних за ключем. Повертає дані, або null
@@ -41,6 +57,23 @@ const localStorageAPI = {
         this.saveData(key, currentCollection);
       }
     },
+
+
+    getTotalPages(key){
+    
+      let array = this.loadData(key);
+      return Math.ceil(array.length / 20);
+    },
+
+    getPaginationPage(page, array ){
+
+     const perPage = 20;
+     let start = (page - 1) * perPage;
+     let end = start + perPage;
+     return array.slice(start, end);
+    
+    }
+    
   };
 
   
