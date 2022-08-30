@@ -1,10 +1,12 @@
-
+import './js/services/buttonLibraryHandler';
 import "./js/services/modal";
-import MoviesApiService from './js/services/moviesAPIService';
-import './partials/main-section';
-import { PaginationHandler } from './js/services/paginationHandler';
-// import inputHandler from './js/services/inputHandler'
-import appendGallery from './js/services/card'
+import './js/services/moviesAPIService';
+import './js/services/paginationHandler';
+import './js/services/inputHandler';
+import './js/services/card';
+import './js/services/local-storage-api';
+import './js/services/team-modal';
+
 
 
 
