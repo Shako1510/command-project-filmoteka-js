@@ -4,11 +4,11 @@ const moviesApiService = new MoviesApiService();
 import { PaginationHandler } from './paginationHandler';
 console.log(PaginationHandler);
 document.addEventListener('DOMContentLoaded', onTrending);
-// async function getGenres() {
-//   const genres = await moviesApiService.fetchGenres();
-//   // console.log(genres);
-// }
-// getGenres();
+async function getGenres() {
+  const genres = await moviesApiService.fetchGenres();
+  // console.log(genres);
+}
+getGenres();
 function onTrending(e) {
   e.preventDefault();
   moviesApiService.fetchTrendingMovies().then(appendGallery);
