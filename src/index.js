@@ -1,39 +1,32 @@
-import MoviesApiService from './js/services/moviesAPIService';
-import './partials/main-section';
-import { PaginationHandler } from './js/services/paginationHandler';
+
+import './js/services/buttonLibraryHandler';
+import "./js/services/modal";
+import './js/services/moviesAPIService';
+import './js/services/paginationHandler';
+import './js/services/inputHandler';
+import './js/services/card';
 import './js/services/local-storage-api';
+import './js/services/team-modal';
 
-const moviesApiService = new MoviesApiService();
-console.log(moviesApiService);
 
-async function testAPI() {
-  try {
-    const trendingMovies = await moviesApiService.fetchTrendingMovies();
-    console.log(trendingMovies);
 
-    const movieDetails = await moviesApiService.fetchMovieDetails(539681);
-    console.log(movieDetails);
 
-    const movieByQuert = await moviesApiService.fetchMoviesByQuery('Lion');
-    console.log(movieByQuert);
-  } catch (error) {
-    console.log(error);
-  }
-}
 
-testAPI();
+// const moviesApiService = new MoviesApiService();
 
-moviesApiService.pageMovie = 2;
+// console.log(moviesApiService);
 
-console.log(moviesApiService.pageMovie);
+// const pagination = new PaginationHandler(
+//   21,
+//   document.querySelector('.pagination__root')
+// );
 
-// initialisation pagination section
-const pagination = new PaginationHandler();
+// pagination.initPagination();
 
-pagination.initPagination(document.querySelector('.pagination__root'));
 
-// adding listener of choosing page by pagination
+// pagination.addEventListener('pageChanged', pageNumber =>
+//   console.log('choosenPage is: ', pageNumber)
+// );
 
-pagination.addEventListener('pageChanged', pageNumber =>
-  console.log('choosenPage is: ', pageNumber)
-);
+// // inputHandler() Анастасія - параметром сюди передайте свою функцію по рендерінгу, і має спрацювати
+// inputHandler(appendGallery);

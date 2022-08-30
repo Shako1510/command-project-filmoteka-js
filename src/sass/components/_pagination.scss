@@ -1,5 +1,10 @@
+.hidden {
+  visibility: hidden;
+}
+
 .pagination__root {
   margin-top: 10px;
+  margin-bottom: 160px;
 }
 
 .pagination__wrap {
@@ -9,7 +14,7 @@
     display: block;
     position: relative;
     overflow: hidden;
-    width: 220px;
+    width: 225px;
   }
 }
 
@@ -23,9 +28,6 @@
   transition-property: transform;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover {
-    transform: translatex(-45px);
-  }
 }
 
 .pagination__item {
@@ -35,7 +37,25 @@
   background-color: tomato;
 
   &--carrousel {
-    background-color: aqua;
     flex-shrink: 0;
+  }
+}
+
+.pagination__wrap--dots {
+  display: flex;
+  position: relative;
+}
+
+.pagination__dots {
+  width: 40px;
+  height: 40px;
+  margin-left: 5px;
+  background-color: tomato;
+  position: absolute;
+  &--left {
+    left: 0px;
+  }
+  &--right {
+    right: 0px;
   }
 }
