@@ -21,6 +21,8 @@ export class PaginationHandler {
   markupPagination = () => {
     let markup = '';
 
+    if (this.totalPages === 1) return markup;
+
     if (this.totalPages <= 9) {
       markup = `<div class="pagination__wrap">
               <div class="pagination__item--arrow-left"><--</div>`;
