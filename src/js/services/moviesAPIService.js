@@ -13,7 +13,12 @@ export default class MoviesApiService {
       `${BASE_URL}/3/trending/movie/week?api_key=${API_KEY}`
     );
     localStorage.setItem('fetchedMovies', JSON.stringify(movies.data.results));
-    return movies.data;
+   
+    const movieByQuert = {
+      results: movies.data.results,
+      totalPage: movies.data.total_pages,
+    };
+    return movieByQuert;
   }
 
   async fetchMoviesByQuery(query, page = 1) {
@@ -21,7 +26,12 @@ export default class MoviesApiService {
       `${BASE_URL}/3/search/movie?api_key=${API_KEY}&query=${query}&language=en-US&page=${page}&include_adult=false`
     );
     localStorage.setItem('fetchedMovies', JSON.stringify(movies.data.results));
-    return movies.data;
+    
+    const movieByQuert = {
+      results: movies.data.results,
+      totalPage: movies.data.total_pages,
+    };
+    return movieByQuert;
   }
 
   async fetchMovieDetails(movieId) {
@@ -30,7 +40,6 @@ export default class MoviesApiService {
     );
     // console.log(movies)
     return movies.data;
-
   }
 
   resetPage() {
