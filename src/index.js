@@ -9,21 +9,21 @@ import appendGallery from './js/services/card'
 
 
 
-const moviesApiService = new MoviesApiService();
+// const moviesApiService = new MoviesApiService();
 
-console.log(moviesApiService);
+// console.log(moviesApiService);
 
-const pagination = new PaginationHandler(
-  21,
-  document.querySelector('.pagination__root')
-);
+// const pagination = new PaginationHandler(
+//   21,
+//   document.querySelector('.pagination__root')
+// );
 
-pagination.initPagination();
+// pagination.initPagination();
 
 
-pagination.addEventListener('pageChanged', pageNumber =>
-  console.log('choosenPage is: ', pageNumber)
-);
+// pagination.addEventListener('pageChanged', pageNumber =>
+//   console.log('choosenPage is: ', pageNumber)
+// );
 
-// inputHandler() Анастасія - параметром сюди передайте свою функцію по рендерінгу, і має спрацювати
-inputHandler(appendGallery);
+// // inputHandler() Анастасія - параметром сюди передайте свою функцію по рендерінгу, і має спрацювати
+// inputHandler(appendGallery);
