@@ -3,7 +3,7 @@ import "./js/services/modal";
 import MoviesApiService from './js/services/moviesAPIService';
 import './partials/main-section';
 import { PaginationHandler } from './js/services/paginationHandler';
-import inputHandler from './js/services/inputHandler'
+// import inputHandler from './js/services/inputHandler'
 import appendGallery from './js/services/card'
 
 
