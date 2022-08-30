@@ -4,14 +4,14 @@ const moviesApiService = new MoviesApiService();
 const openModalDescription = document.querySelector('.collection__list');
 const showModal = document.querySelector('[data-modal]');
 const closeBtn = document.querySelector('.modal-close__btn');
-const modal = document.querySelector('.modal');
+const modal = document.querySelector('.modal-window');
 
 // Підтягування id фільму
 function makeMarkup(data) {
   const markup = `
         <div class="modal-conteiner">
             <div class="modal-container__banner">
-                <img class="modal-container__img" src="https://image.tmdb.org/t/p/w500${data.poster_path}"
+                <img class="modal-container__img" src=""
                     alt="Banner of the selected film">
             </div>
             <div class="modal-container__row">
@@ -47,33 +47,39 @@ function makeMarkup(data) {
                 </div>
             </div>`;
 
-  //   return (modal.innerHTML = markup);
+    // return modal.innerHTML = markup;
   return modal.insertAdjacentHTML("beforeend", markup)
 }
 
 async function searchedData(id) {
   try {
-    const data = await moviesApiService.fetchMovieDetails(id);
-    console.log(data);
-
+    // const dataForModalInLocal = localStorage.getItem("fetchedMovies");
+    // const parceDataForModalInLocal = JSON.parse(dataForModalInLocal)
+    const data = await moviesApiService.fetchTrendingMovies(id);
+    console.log(data)
+  
     const markup = await makeMarkup(data);
     return markup;
+
   } catch (error) {
     console.error(error);
   }
 }
 
+
 // Додаємо слухача і відкриваємо модальне вікно при кліку на картку
 openModalDescription.addEventListener('click', onModalClick);
 function onModalClick(evt) {
   evt.preventDefault();
-  if (evt.target.closest('.movie__link')) {
+  if (evt.target.closest('.card')) {
     window.addEventListener('keydown', onEscKeyPress);
     showModal.classList.add('is-open');
+    console.log("he")
     const filmId = evt.srcElement.parentElement.id;
     searchedData(filmId);
-  }
-}
+  };
+};
+
 function onModalClose() {
   modal.innerHTML = "";
   window.removeEventListener('keydown', onEscKeyPress);

@@ -29,6 +29,7 @@ function getPage(pageNumber) {
   console.log(currentPage);
   onSearchMovie();
 }
+
 export function getQuery(query) {
   currentQuery = query;
   console.log('getQuery', currentQuery);
