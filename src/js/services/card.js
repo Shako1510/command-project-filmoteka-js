@@ -49,10 +49,10 @@ function getPage(pageFromPagination) {
 export default function appendGallery(data) {
   console.log(data);
   clearContainer()
-  const markupOneCard = data.result.map(movie => {
+  const markupOneCard = data.results.map(movie => {
     return `
             <li class="collection__item">
-            <div class="card">
+            <div class="card" >
             <a href="" class="card__link" >
           <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${movie.poster_path
       }" alt="" ></a>
@@ -84,7 +84,7 @@ export default function appendGalleryTrending(data) {
   const markupOneCard = data.map(movie => {
     return `
             <li class="collection__item">
-            <div class="card">
+            <div class="card" id="${movie.id}">
             <a href="" class="card__link" >
           <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${movie.poster_path
       }" alt="" ></a>
