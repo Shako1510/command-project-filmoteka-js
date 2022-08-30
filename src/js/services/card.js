@@ -66,4 +66,4 @@ export function appendGallery(data) {
 
 function clearContainer() {
   gallery.innerHTML = '';
-}
+
