@@ -21,8 +21,6 @@ export class PaginationHandler {
   markupPagination = () => {
     let markup = '';
 
-    if (this.totalPages === 1) return markup;
-
     if (this.totalPages <= 9) {
       markup = `<div class="pagination__wrap">
               <div class="pagination__item-arrow pagination__item-arrow--left"></div>`;
@@ -177,6 +175,8 @@ export class PaginationHandler {
   };
 
   initPagination = () => {
+    if (this.totalPages === 1) return;
+
     this.renderPagination();
     this.currentItem = this.pageItems[this.currentPage];
     this.makeItemIsCurrent(this.currentItem);
