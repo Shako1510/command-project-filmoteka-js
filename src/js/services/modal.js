@@ -1,38 +1,24 @@
 import MoviesApiService from './moviesAPIService';
-const moviesApiService = new MoviesApiService();
 
+const moviesApiService = new MoviesApiService();
 const openModalDescription = document.querySelector('.collection__list');
 const showModal = document.querySelector('[data-modal]');
 const closeBtn = document.querySelector('.modal-close__btn');
-const modal = document.querySelector('.modal-window');
 const modalContainer = document.querySelector('.modal-window__content');
 
-function getGenresDataStorage() {
-  const getValueKeyForGenre = localStorage.getItem("genresItem");
-    return JSON.parse(getValueKeyForGenre);
-};
-
-// function convertIdInGenre(id) {
-//   let arrGenres = [];
+// function getGenresDataStorage() {
 //   const getValueKeyForGenre = localStorage.getItem("genresItem");
-//    const parce = JSON.parse(getValueKeyForGenre)
-//   for (const genre of parce) {
-//     let realGenre = convertIdInGenre(genres.id);
-//     return arrGenres.push(realGenre);
-//   }
-// }
+//     return JSON.parse(getValueKeyForGenre);
+// };
+
+function localStorageFilms(value) {
+  const filmsFromLocalStorage = localStorage.getItem("fetchedMovies")
+  const sortingFilms = JSON.parse(filmsFromLocalStorage);
+  return sortingFilms.map(value => value);
+};
 
 // Підтягування id фільму
 function makeMarkup(data) {  
-  // const filterGenre = getGenresDataStorage().filter(value => value.name);
-  const getValueKeyForGenre = localStorage.getItem("genresItem");
-  const parceGenres = JSON.parse(getValueKeyForGenre)
-  let arrGenres = [];
-  for (gener of parceGenres) {
-    if (gener.name === data.genres.name) {
-       return arrGenres.push(gener.name)
-    };
-  };
   const markup = `
         <div class="modal-conteiner">
             <div class="modal-container__banner">
@@ -61,7 +47,7 @@ function makeMarkup(data) {
                     <tr class="table__row">
                         <td class="table__description">Genre</td>
                         <td class="between-genres"></td>
-                        <td class="table__data">${gener.name}</td>
+                        <td class="table__data">${data.genres.map(value => Object.values(value.name).join(""))}</td>
                     </tr>
                 </table>
                 <p class="modal-container__title">ABOUT</p>
@@ -71,24 +57,19 @@ function makeMarkup(data) {
                     <button type="button" class="modal-conteiner__second-btn">add to queue</button>
                 </div>
             </div>`;
-
     return modalContainer.innerHTML = markup;
-  // return modal.insertAdjacentHTML("beforeend", markup)
-}
+};
 
 async function searchedData(id) {
   try {
     const data = await moviesApiService.fetchMovieDetails(id);
-    console.log(data)
-  
     const markup = await makeMarkup(data);
     return markup;
 
   } catch (error) {
     console.error(error);
-  }
-}
-
+  };
+};
 
 // Додаємо слухача і відкриваємо модальне вікно при кліку на картку
 openModalDescription.addEventListener('click', onModalClick);
@@ -103,7 +84,6 @@ function onModalClick(evt) {
 };
 
 function onModalClose() {
-  // modal.innerHTML = "";
   window.removeEventListener('keydown', onEscKeyPress);
   showModal.classList.remove('is-open');
 }
@@ -112,14 +92,14 @@ showModal.addEventListener('click', onBackdropClick);
 function onBackdropClick(evt) {
   if (evt.currentTarget === evt.target) {
     onModalClose();
-  }
-}
+  };
+};
 // Закриття модального вікна при кліку на ESC (події клавіатури обробляються на документі, а не на конкретному елементі)
 
 function onEscKeyPress(evt) {
   if (evt.code === 'Escape') {
     onModalClose();
-  }
-}
+  };
+};
 // Закриваємо модальне вікно при кліку на кнопку
 closeBtn.addEventListener('click', onModalClose);

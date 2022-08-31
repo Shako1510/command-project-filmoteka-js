@@ -76,7 +76,6 @@ export default class LocalStorageAPI {
       return array
         .map(id => genres.find(element => element.id === id))
         .map(item => item.name);
-
   };
 };
 
