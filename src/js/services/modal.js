@@ -5,13 +5,38 @@ const openModalDescription = document.querySelector('.collection__list');
 const showModal = document.querySelector('[data-modal]');
 const closeBtn = document.querySelector('.modal-close__btn');
 const modal = document.querySelector('.modal-window');
+const modalContainer = document.querySelector('.modal-window__content');
+
+function getGenresDataStorage() {
+  const getValueKeyForGenre = localStorage.getItem("genresItem");
+    return JSON.parse(getValueKeyForGenre);
+};
+
+// function convertIdInGenre(id) {
+//   let arrGenres = [];
+//   const getValueKeyForGenre = localStorage.getItem("genresItem");
+//    const parce = JSON.parse(getValueKeyForGenre)
+//   for (const genre of parce) {
+//     let realGenre = convertIdInGenre(genres.id);
+//     return arrGenres.push(realGenre);
+//   }
+// }
 
 // Підтягування id фільму
-function makeMarkup(data) {
+function makeMarkup(data) {  
+  // const filterGenre = getGenresDataStorage().filter(value => value.name);
+  const getValueKeyForGenre = localStorage.getItem("genresItem");
+  const parceGenres = JSON.parse(getValueKeyForGenre)
+  let arrGenres = [];
+  for (gener of parceGenres) {
+    if (gener.name === data.genres.name) {
+       return arrGenres.push(gener.name)
+    };
+  };
   const markup = `
         <div class="modal-conteiner">
             <div class="modal-container__banner">
-                <img class="modal-container__img" src=""
+                <img class="modal-container__img" src="https://image.tmdb.org/t/p/w500${data.poster_path}"
                     alt="Banner of the selected film">
             </div>
             <div class="modal-container__row">
@@ -19,24 +44,24 @@ function makeMarkup(data) {
                     <h2 class="modal-table__title">${data.title}</h2>
                     <tr class="table__row">
                         <td class="table__description">Vote / Votes</td>
-                        <td></td>
+                        <td class="between-genres"></td>
                         <td class="table__data"><span class="table-data__raiting">${data.vote_average}</span> / <span
                                 class="table-data__scores">${data.vote_count}</span></td>
                     </tr>
                     <tr class="table__row">
                         <td class="table__description">Popularity</td>
-                        <td></td>
+                        <td class="between-genres"></td>
                         <td class="table__data">${data.popularity}</td>
                     </tr>
                     <tr class="table__row">
                         <td class="table__description">Original Title</td>
-                        <td></td>
+                        <td class="between-genres"></td>
                         <td class="table__data">${data.original_title}</td>
                     </tr>
                     <tr class="table__row">
                         <td class="table__description">Genre</td>
-                        
-                        <td class="table__data">${data.genre_ids}</td>
+                        <td class="between-genres"></td>
+                        <td class="table__data">${gener.name}</td>
                     </tr>
                 </table>
                 <p class="modal-container__title">ABOUT</p>
@@ -47,15 +72,13 @@ function makeMarkup(data) {
                 </div>
             </div>`;
 
-    // return modal.innerHTML = markup;
-  return modal.insertAdjacentHTML("beforeend", markup)
+    return modalContainer.innerHTML = markup;
+  // return modal.insertAdjacentHTML("beforeend", markup)
 }
 
 async function searchedData(id) {
   try {
-    // const dataForModalInLocal = localStorage.getItem("fetchedMovies");
-    // const parceDataForModalInLocal = JSON.parse(dataForModalInLocal)
-    const data = await moviesApiService.fetchTrendingMovies(id);
+    const data = await moviesApiService.fetchMovieDetails(id);
     console.log(data)
   
     const markup = await makeMarkup(data);
@@ -74,14 +97,13 @@ function onModalClick(evt) {
   if (evt.target.closest('.card')) {
     window.addEventListener('keydown', onEscKeyPress);
     showModal.classList.add('is-open');
-    console.log("he")
     const filmId = evt.srcElement.parentElement.id;
     searchedData(filmId);
   };
 };
 
 function onModalClose() {
-  modal.innerHTML = "";
+  // modal.innerHTML = "";
   window.removeEventListener('keydown', onEscKeyPress);
   showModal.classList.remove('is-open');
 }
