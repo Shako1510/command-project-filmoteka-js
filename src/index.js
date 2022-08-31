@@ -1,5 +1,4 @@
 
-// import './js/services/buttonLibraryHandler';
 import "./js/services/modal";
 import './js/services/moviesAPIService';
 import './js/services/paginationHandler';
