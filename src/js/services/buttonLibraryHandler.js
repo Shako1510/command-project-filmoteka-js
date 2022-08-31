@@ -1,12 +1,11 @@
 import { appendGallery } from './card';
+// import localStorageAPI from './local-storage-api.js'
 
-const formLibraryRef = document.querySelector('#libraryForm');
 
 const list = document.querySelector('.collection__list');
 const watchedRef = document.querySelector('#Watched');
 const queueRef = document.querySelector('#Queue');
 const libraryLink = document.querySelector('.library');
-const collection = document.querySelector('.collection');
 const notification = document.querySelector('.notification');
 
 watchedRef.addEventListener('click', onButtonClick);
@@ -53,58 +52,26 @@ const filmWatched = [
 ];
 
 const filmQueue = [
-  {
-    adult: false,
-    backdrop_path: '/5FFpcmPzD5mhLom7bymZq7Py8eT.jpg',
-    id: 862551,
-    title: 'Me Time',
-    original_language: 'en',
-    original_title: 'Me Time',
-    overview:
-      'With his family away, a devoted stay-at-home dad enjoys his first me time in years by joining his hard-partying old friend on a wild birthday adventure.',
-    poster_path: '/bkjPoisqAavXUvtoirxTEcLLQyI.jpg',
-    media_type: 'movie',
-    genre_ids: [35],
-    popularity: 139.203,
-    release_date: '2022-08-26',
-    video: false,
-    vote_average: 5.805,
-    vote_count: 105,
-  },
+  // {
+  //   adult: false,
+  //   backdrop_path: '/5FFpcmPzD5mhLom7bymZq7Py8eT.jpg',
+  //   id: 862551,
+  //   title: 'Me Time',
+  //   original_language: 'en',
+  //   original_title: 'Me Time',
+  //   overview:
+  //     'With his family away, a devoted stay-at-home dad enjoys his first me time in years by joining his hard-partying old friend on a wild birthday adventure.',
+  //   poster_path: '/bkjPoisqAavXUvtoirxTEcLLQyI.jpg',
+  //   media_type: 'movie',
+  //   genre_ids: [35],
+  //   popularity: 139.203,
+  //   release_date: '2022-08-26',
+  //   video: false,
+  //   vote_average: 5.805,
+  //   vote_count: 105,
+  // },
 ];
 
-export default function btnLibraryHandler(functionRender, renderDefault) {
-  formLibraryRef.addEventListener('change', onButtonClick);
-
-  function onButtonClick(e) {
-    e.preventDefault();
-    console.log('поменяли кнопку');
-
-    if (watchedRef.checked) {
-      const watchedFilms = JSON.parse(localStorage.getItem('watched'));
-      if (!watchedFilms) {
-        console.log('отображаем заглушку');
-        // renderDefault()
-        // викликаємо функцію рендеру заглушки
-      } else {
-        //  functionRender(watchedFilms)
-        console.log('рендерим watchedFilms', watchedFilms);
-      }
-    } else {
-      const queueFilms = JSON.parse(localStorage.getItem('queue'));
-      if (!queueFilms) {
-        console.log('отображаем заглушку');
-        // renderDefault()
-        // викликаємо функцію рендеру заглушки
-      } else {
-        //  functionRender(queueFilms)
-        console.log('рендерим queueuFilms', queueFilms);
-      }
-    }
-  }
-}
-
-// import localStorageAPI from './local-storage-api.js'
 
 localStorage.setItem('watched', JSON.stringify(filmWatched));
 localStorage.setItem('queue', JSON.stringify(filmQueue));
@@ -114,9 +81,7 @@ localStorage.setItem('queue', JSON.stringify(filmQueue));
 
 function onLibraryWatched(event) {
   event.preventDefault();
-  console.log('поменяли кнопку');
   watchedRef.classList.add('checked');
-
   queueRef.classList.remove('checked');
   notification.innerHTML = '';
 
@@ -124,22 +89,19 @@ function onLibraryWatched(event) {
   // const watchedFilms = localStorageAPI.getMovies("fetchedMovies");
 
   if (watchedFilms.length === 0) {
-    console.log('отображаем заглушку');
     list.innerHTML = '';
 
     notFound();
   } else {
     list.innerHTML = '';
-    console.log('рендерим watchedFilms', watchedFilms);
     const markupOneCard = appendGallery(watchedFilms);
   }
 }
 
 function onButtonClick(event) {
   event.preventDefault();
-  console.log('поменяли кнопку');
-  watchedRef.classList.add('checked');
 
+  watchedRef.classList.add('checked');
   queueRef.classList.remove('checked');
   notification.innerHTML = '';
 
@@ -147,13 +109,11 @@ function onButtonClick(event) {
   // const watchedFilms = localStorageAPI.getMovies("fetchedMovies");
 
   if (watchedFilms.length === 0) {
-    console.log('отображаем заглушку');
     list.innerHTML = '';
 
     notFound();
   } else {
     list.innerHTML = '';
-    console.log('рендерим watchedFilms', watchedFilms);
     const markupOneCard = appendGallery(watchedFilms);
   }
 }
@@ -167,14 +127,12 @@ function onQueueClick(event) {
 
   const queueFilms = JSON.parse(localStorage.getItem('queue'));
   if (queueFilms.length === 0) {
-    console.log('отображаем заглушку');
 
     list.innerHTML = '';
 
     notFound();
   } else {
     list.innerHTML = '';
-    console.log('рендерим queueuFilms', queueFilms);
     const markupOneCard = appendGallery(queueFilms);
   }
 }
@@ -182,6 +140,6 @@ function onQueueClick(event) {
 function notFound() {
   const notificationText = document.createElement('p');
   notificationText.classList.add('notification-text');
-  notificationText.innerHTML = "Oops, you haven't added anything yet...";
+  notificationText.innerHTML = "Oops, you didn't add anything yet...";
   notification.appendChild(notificationText);
 }
