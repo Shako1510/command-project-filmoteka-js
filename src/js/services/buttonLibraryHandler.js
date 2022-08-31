@@ -2,16 +2,16 @@ import { appendGallery } from './card';
 
 const formLibraryRef = document.querySelector('#libraryForm');
 
-watchedRef.addEventListener('click', onButtonClick);
-queueRef.addEventListener('click', onQueueClick);
-libraryLink.addEventListener('click', onLibraryWatched);
-
 const list = document.querySelector('.collection__list');
 const watchedRef = document.querySelector('#Watched');
 const queueRef = document.querySelector('#Queue');
 const libraryLink = document.querySelector('.library');
 const collection = document.querySelector('.collection');
 const notification = document.querySelector('.notification');
+
+watchedRef.addEventListener('click', onButtonClick);
+queueRef.addEventListener('click', onQueueClick);
+libraryLink.addEventListener('click', onLibraryWatched);
 
 const filmWatched = [
   {
