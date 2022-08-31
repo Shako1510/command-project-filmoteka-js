@@ -1,5 +1,5 @@
 
-// import './js/services/buttonLibraryHandler';
+import './js/services/buttonLibraryHandler';
 import "./js/services/modal";
 import './js/services/moviesAPIService';
 import './js/services/paginationHandler';
@@ -7,6 +7,7 @@ import './js/services/inputHandler';
 import './js/services/card';
 import './js/services/local-storage-api';
 import './js/services/team-modal';
+
 
 
 
