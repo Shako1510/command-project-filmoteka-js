@@ -58,7 +58,7 @@ export function appendGallery(data) {
 
   pagination.initPagination();
 
-  // adding listener of choosing page by pagination
+  //  // adding listener of choosing page by pagination
 
   pagination.addEventListener('pageChanged', onSearchMovie);
 }
