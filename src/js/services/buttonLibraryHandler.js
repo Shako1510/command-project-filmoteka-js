@@ -1,6 +1,3 @@
-localStorage.setItem('watched', JSON.stringify(filmWatched));
-localStorage.setItem('queue', JSON.stringify(filmQueue));
-
 const formLibraryRef = document.querySelector('#libraryForm');
 
 export default function btnLibraryHandler(functionRender, renderDefault) {
