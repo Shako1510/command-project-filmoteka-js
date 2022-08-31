@@ -21,19 +21,21 @@ export class PaginationHandler {
   markupPagination = () => {
     let markup = '';
 
+    if (this.totalPages === 1) return markup;
+
     if (this.totalPages <= 9) {
       markup = `<div class="pagination__wrap">
-              <div class="pagination__item--arrow-left"><--</div>`;
+              <div class="pagination__item-arrow pagination__item-arrow--left"></div>`;
       for (let i = 1; i <= this.totalPages; i += 1) {
         markup = markup + `<div class="pagination__item">${i}</div>`;
       }
       markup =
         markup +
-        `<div class="pagination__item--arrow-right">--></div>
+        `<div class="pagination__item-arrow pagination__item-arrow--right"></div>
     </div>`;
     } else {
       markup = `<div class="pagination__wrap">
-      <div class="pagination__item--arrow-left"><--</div>
+      <div class="pagination__item-arrow pagination__item-arrow--left"></div>
       <div class="pagination__item pagination__item--first">1</div>
       <div class="pagination__wrap--dots">
         <div class="pagination__item pagination__item--second">2</div>
@@ -59,7 +61,7 @@ export class PaginationHandler {
       <div class="pagination__item pagination__item--last">${
         this.totalPages
       }</div>
-      <div class="pagination__item--arrow-right">--></div>
+      <div class="pagination__item-arrow pagination__item-arrow--right"></div>
     </div>`;
     }
     return markup;
@@ -70,10 +72,10 @@ export class PaginationHandler {
     this.root.innerHTML = this.markupPagination();
 
     this.arrowLeftElement = this.root.querySelector(
-      '.pagination__item--arrow-left'
+      '.pagination__item-arrow--left'
     );
     this.arrowRightElement = this.root.querySelector(
-      '.pagination__item--arrow-right'
+      '.pagination__item-arrow--right'
     );
 
     this.addingListenerToItems();
@@ -164,11 +166,14 @@ export class PaginationHandler {
   };
 
   makeItemIsCurrent = item => {
-    item.style.backgroundColor = 'yellow';
+    item.style.backgroundColor = '#FF6B08';
+    item.style.borderRadius = '5px';
+    item.style.color = '#ffffff';
   };
 
   resetCurrentItem = () => {
-    this.pageItems[this.currentPage].style.backgroundColor = 'tomato';
+    this.pageItems[this.currentPage].style.backgroundColor = '#ffffff';
+    this.pageItems[this.currentPage].style.color = '#000000';
   };
 
   initPagination = () => {

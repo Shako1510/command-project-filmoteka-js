@@ -16,7 +16,7 @@ export default class MoviesApiService {
 
     const movieByQuert = {
       results: movies.data.results,
-      totalPage: movies.data.total_pages,
+      totalPage: 1,
       page: movies.data.page,
     };
     return movieByQuert;
