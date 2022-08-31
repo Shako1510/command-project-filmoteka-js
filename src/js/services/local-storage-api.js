@@ -1,62 +1,51 @@
 
-// export default localStorageAPI
+// import moviesAPIService from './moviesAPIService';
+// const getFilms = new moviesAPIService();
 
-import fetch from './moviesAPIService';
+export default class LocalStorageAPI {
 
-const getFilms = new fetch();
-
-async function fetchMovie(){
-  try { const data = await getFilms.fetchTrendingMovies();
+  constructor (){
     
-  } catch (error) {
-    console.log(error);
   }
-}
 
-console.log(fetchMovie());
-
-const LocalStorageAPI =  {
-
-  // Отримання даних за ключем. Повертає дані(об єкт), або null
+  // Отримання даних за ключем. Повертає дані, або null
   loadData(key) {
     const localStorageData = localStorage.getItem(key);
     return JSON.parse(localStorageData);
-  },
+  };
 
   // Запис даних до сховища. Записує дані з ключем key
   saveData(key, value) {
+   
     const dataToSave = JSON.stringify(value);
     localStorage.setItem(key, dataToSave);
-     
-    // витягнути масив через лоад дата із локал стредж
-    // через пуш дозаписати 
-  },
+    return 'ok';
+  };
 
   // Отримання колекції фільмів. Повертає масив фільмів, або порожній масив з його попереднім записом до сховища
   getMovies(key, page) {
     const movies = this.loadData(key); // отр 
     const totalPages = this.getTotalPage(movies);
     const result = {movies: this.getPaginationPage(movies, page), totalPages};
-
-    // if (!movies) {
-    //   this.saveData(key, []);
-    //   return [];
-    // } else {
       return result;
-  }, 
-  // має повертати масив муві та тотал пейдж (якщо масив більше 20)
-  // Додавання фільмів до колекції. Додає новий елемент до поточної колекції фільмів у сховищі
+  };
   
+
+  // Додавання фільмів до колекції. Додає новий елемент до поточної колекції фільмів у сховищі
   setMovie(key, value) {
+
+   try {
     const currentCollection = this.getMovies(key);
     currentCollection.push(value);
-
-    this.saveData(key, currentCollection);
-    // return 
-    // try catch 
-    //перевірити для відкриття, закриття модалки , 
-    // певернути статус коли ОК - закрили модалку, якщо ні - то, перший запис
-  },
+    return this.saveData(key, currentCollection);
+    
+   } catch (error) {
+    console.log(error.name);
+    console.log(error.message);
+    
+   }
+  
+  };
 
   removeMovie(key, value) {
     const currentCollection = this.getMovies(key);
@@ -66,11 +55,11 @@ const LocalStorageAPI =  {
       currentCollection.splice(indexToRemove, 1);
       this.saveData(key, currentCollection);
     }
-  },
+  };
 
   getTotalPages(movies) {
       return Math.ceil(movies.length / 20);
-    },
+    };
 
     getPaginationPage(page, array ){
 
@@ -79,13 +68,17 @@ const LocalStorageAPI =  {
      let end = start + perPage;
      return array.slice(start, end);
     
-    },
+    };
     
-  getGenres(key){
+  createGenres(array){
 
-    myArray = this.loadData(key);
+    const genres = this.loadData('genres');
+      return array
+        .map(id => genres.find(element => element.id === id))
+        .map(item => item.name);
 
-  }
+  };
 };
 
-     
+
+ 
