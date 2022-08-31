@@ -1,38 +1,17 @@
+import { appendGallery } from './card';
+
 const formLibraryRef = document.querySelector('#libraryForm');
 
-export default function btnLibraryHandler(functionRender, renderDefault) {
-  formLibraryRef.addEventListener('change', onButtonClick);
+watchedRef.addEventListener('click', onButtonClick);
+queueRef.addEventListener('click', onQueueClick);
+libraryLink.addEventListener('click', onLibraryWatched);
 
-  function onButtonClick(e) {
-    e.preventDefault();
-    console.log('поменяли кнопку');
-
-    if (watchedRef.checked) {
-      const watchedFilms = JSON.parse(localStorage.getItem('watched'));
-      if (!watchedFilms) {
-        console.log('отображаем заглушку');
-        // renderDefault()
-        // викликаємо функцію рендеру заглушки
-      } else {
-        //  functionRender(watchedFilms)
-        console.log('рендерим watchedFilms', watchedFilms);
-      }
-    } else {
-      const queueFilms = JSON.parse(localStorage.getItem('queue'));
-      if (!queueFilms) {
-        console.log('отображаем заглушку');
-        // renderDefault()
-        // викликаємо функцію рендеру заглушки
-      } else {
-        //  functionRender(queueFilms)
-        console.log('рендерим queueuFilms', queueFilms);
-      }
-    }
-  }
-}
-
-import { appendGallery } from './card';
-// import localStorageAPI from './local-storage-api.js'
+const list = document.querySelector('.collection__list');
+const watchedRef = document.querySelector('#Watched');
+const queueRef = document.querySelector('#Queue');
+const libraryLink = document.querySelector('.library');
+const collection = document.querySelector('.collection');
+const notification = document.querySelector('.notification');
 
 const filmWatched = [
   {
@@ -94,22 +73,44 @@ const filmQueue = [
   },
 ];
 
+export default function btnLibraryHandler(functionRender, renderDefault) {
+  formLibraryRef.addEventListener('change', onButtonClick);
+
+  function onButtonClick(e) {
+    e.preventDefault();
+    console.log('поменяли кнопку');
+
+    if (watchedRef.checked) {
+      const watchedFilms = JSON.parse(localStorage.getItem('watched'));
+      if (!watchedFilms) {
+        console.log('отображаем заглушку');
+        // renderDefault()
+        // викликаємо функцію рендеру заглушки
+      } else {
+        //  functionRender(watchedFilms)
+        console.log('рендерим watchedFilms', watchedFilms);
+      }
+    } else {
+      const queueFilms = JSON.parse(localStorage.getItem('queue'));
+      if (!queueFilms) {
+        console.log('отображаем заглушку');
+        // renderDefault()
+        // викликаємо функцію рендеру заглушки
+      } else {
+        //  functionRender(queueFilms)
+        console.log('рендерим queueuFilms', queueFilms);
+      }
+    }
+  }
+}
+
+// import localStorageAPI from './local-storage-api.js'
+
 localStorage.setItem('watched', JSON.stringify(filmWatched));
 localStorage.setItem('queue', JSON.stringify(filmQueue));
 
-const list = document.querySelector('.collection__list');
-const watchedRef = document.querySelector('#Watched');
-const queueRef = document.querySelector('#Queue');
-const libraryLink = document.querySelector('.library');
-const collection = document.querySelector('.collection');
-const notification = document.querySelector('.notification');
-
 // localStorageAPI.getMovies();
 // localStorageAPI.setMovie();
-
-watchedRef.addEventListener('click', onButtonClick);
-queueRef.addEventListener('click', onQueueClick);
-libraryLink.addEventListener('click', onLibraryWatched);
 
 function onLibraryWatched(event) {
   event.preventDefault();
