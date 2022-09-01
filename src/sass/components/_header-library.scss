@@ -229,3 +229,20 @@
   .side-nav--lib {
     margin-bottom: 51px;
   }
+
+  .checked ~.store__btn {
+  background-color: #FF6B01;
+  border: 1px solid #FF6B01;
+  color: #ffff;
+  }
+
+  .notification-text {
+    display: flex;
+    justify-content: center;
+    font-family: $mainFont;
+    font-weight: bold;
+    font-size: 20px;
+    color: #FF6B01;
+    padding-top: 180px;
+    padding-bottom: 180px;
+  }

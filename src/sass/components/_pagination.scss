@@ -34,7 +34,17 @@
   width: 40px;
   height: 40px;
   margin-left: 5px;
-  background-color: tomato;
+  padding-top: 12px;
+  background-color: #ffffff;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  text-align: center;
+  cursor: pointer;
 
   &--carrousel {
     flex-shrink: 0;
@@ -50,12 +60,31 @@
   width: 40px;
   height: 40px;
   margin-left: 5px;
-  background-color: tomato;
+  padding-top: 8px;
+
+  background-color: #ffffff;
   position: absolute;
   &--left {
     left: 0px;
   }
   &--right {
     right: 0px;
+  }
+}
+
+.pagination__item-arrow {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 16px 16px;
+
+  &--left {
+    background-image: url('../images/arrow-left.png');
+  }
+  &--right {
+    background-image: url('../images/arrow-right.png');
   }
 }

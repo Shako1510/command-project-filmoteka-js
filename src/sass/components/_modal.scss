@@ -76,11 +76,13 @@
   @media screen and (min-width: 1024px) {
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     padding: 40px 12px;
   }
 }
 
+.between-genres {
+  padding-left: 50px;
+}
 
 p {
   margin: 0;
@@ -109,14 +111,16 @@ br {
 .modal-container__banner {
   @media screen and (min-width: 768px) {
     margin-right: 68px;
+    padding-left: 36px;
   }
   @media screen and (min-width: 1024px) {
     margin-right: 16px;
+    padding-left: 0;
   }
 }
 
 .modal-container__img {
-  width: 240px;
+  width: 280px;
   height: 357px;
   margin-bottom: 20px;
 
@@ -129,6 +133,18 @@ br {
     width: 375px;
     height: 478px;
   }
+}
+
+.modal-container__row {
+  @media screen and (max-width: 767px) {
+    width: 280px;
+  }
+  @media screen and (min-width: 768px) {
+    padding-right: 72px;
+  }
+    @media screen and (min-width: 1024px) {
+      padding-right: 0;
+    }
 }
 
 .modal-table {
