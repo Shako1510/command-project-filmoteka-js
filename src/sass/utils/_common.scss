@@ -32,10 +32,10 @@ p {
 }
 
 .container {
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+    width: 100%;
+     padding-left: 20px;
+      padding-right: 20px;
+      margin: 0 auto;
 
   @media screen and (min-width: $mobile) {
     width: $mobile;
@@ -49,8 +49,7 @@ p {
 
   @media screen and (min-width: $desktop) {
     width: $desktop;
-    padding-left: 32px;
-    padding-right: 32px;
+   
   }
 }
 
