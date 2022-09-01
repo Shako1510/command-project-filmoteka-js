@@ -12,53 +12,63 @@
         width: 768px;
      }
     @media screen and (min-width: $desktop) {
-        width: 1280px;
+        width: 1216px;
     }
 
     &__list {
         display: flex;
         flex-wrap: wrap;
-        margin-right: -32px;
+    //     margin-top: -30px;
+    //    margin-left: -30px;
     }
-        // justify-content: flex-start;
+        
        &__item{
-        margin-right: 32px;
+        margin-right: 16px;
         margin-bottom: 32px;
+        width: 280px;
+            box-sizing: border-box;
+        
+            transform: scale(100%);
+            border-radius: 5px;
+        
+            &:hover,
+            &:focus {
+        
+                // box-shadow: (0px 0px 40px 1px #f0ccb3);
+                opacity: 0.8;
+                transform: scale(98%);
+                transition: transform 250ms ease;
+                // z-index: 100;
+            }
+        
+            @media screen and (min-width: $tablet) and (max-width: $desktop) {
+            width: calc(100% / 2 - 16px);
+                // width: 336px;
+            }
+        
+            @media screen and (min-width: $desktop) {
+                flex-basis: calc(100% / 3 - 16px);
+                // width: 395px;
+            }
+        
+        
+            &__link {
+                
+                margin: 0;
+                display: inline-block;
+            }
+
+
+
+
     }}
 
 
 
 
 .card {
-margin-bottom: 20px;
-        width: 280px;
-    box-sizing: border-box;
-
-    transform: scale(100%);
-    border-radius: 5px;
-
-    &:hover,
-    &:focus {
-
-        // box-shadow: (0px 0px 40px 1px #f0ccb3);
-        opacity: 0.8;
-        transform: scale(98%);
-        transition: transform 250ms ease;
-        z-index: 100;
-    }
-        @media screen and (min-width: $tablet) and (max-width: $desktop){
-            width: 336px;
-        }
-        @media screen and (min-width: $desktop) {
-            width: 395px;
-        }
-
-
-        &__link {
-        margin: 0;
-   }
-
     &__img {
+       max-width: 100%;
         border-radius: 5px;
 height: 402px;
 @media screen and (min-width: $tablet) and (max-width: $desktop){
@@ -71,10 +81,19 @@ height: 574px;
 
     }
                 
+&__wrap{
+margin-top: 10px; 
+@media screen and (min-width: $tablet){
+margin-top: 8px;
+@media screen and (min-width: $desktop) {
+margin-top: 12px;
+    }
+}
 
-
+}
+   
     &__title {
-        margin-top: 10px;
+     
 
         font-family: $mainFont;
         font-style: normal;
@@ -84,14 +103,12 @@ height: 574px;
         color: #000000;
 
         @media screen and (min-width: $tablet) {
-            margin-top: 8px;
+            
             font-size: 20px;
             text-transform: uppercase;
         }
 
-        @media screen and (min-width: $desktop) {
-            margin-top: 12px;
-        }
+        
     }
 
     &__data {
@@ -110,3 +127,5 @@ height: 574px;
     }
 
 }
+
+
