@@ -77,7 +77,6 @@ async function searchedData(id) {
     // removeWatchedBtn.addEventListener('click', ()=>{onRemoveWatchedBtn(data.id)});
     // removeQueueBtn.addEventListener('click', ()=>{onRemoveQueueBtn(data.id)});
 
-   
   } catch (error) {
     console.error(error);
   };
