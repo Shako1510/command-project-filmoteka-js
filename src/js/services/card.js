@@ -4,6 +4,7 @@ import { PaginationHandler } from './paginationHandler';
 document.addEventListener('DOMContentLoaded', onTrending);
 
 function onTrending() {
+  moviesApiService.fetchGenres();
   moviesApiService.fetchTrendingMovies().then(appendGallery);
 }
 

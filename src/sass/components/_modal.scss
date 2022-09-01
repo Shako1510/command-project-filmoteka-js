@@ -100,9 +100,9 @@ br {
   background-color: transparent;
   display: block;
   top: 10px;
-  right: 10px;
-  width: 30px;
-  height: 30px;
+  right: 5px;
+  // width: 30px;
+  // height: 30px;
   fill: #000000;
   border: none;
   outline: none;
@@ -278,4 +278,16 @@ br {
   @media screen and (min-width: 768px) {
     padding: 8px 14px;
   }
+}
+
+.btn-add__watch {
+  background-color: #ffc0cb;
+  pointer-events: none;
+}
+
+.btn-add__queue {
+  background-color: #ffc0cb;
+  pointer-events: none;
+  color: #ffffff;
+  border-color: transparent;
 }

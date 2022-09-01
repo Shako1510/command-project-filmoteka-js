@@ -2,8 +2,10 @@
 export default class LocalStorageAPI {
 
   constructor() {
-    if (!this.loadData('watched')) this.saveData('watched', new Object([]));
-    if (!this.loadData('queue')) this.saveData('queue', new Object([]));
+    if (!this.loadData('watched'))
+      this.saveData('watched', new Object([]));
+    if (!this.loadData('queue'))
+      this.saveData('queue', new Object([]));
   }
 
   // Отримання даних за ключем. Повертає дані, або null

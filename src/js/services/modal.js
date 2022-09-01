@@ -5,28 +5,18 @@ const storage = new LocalStorageAPI();
 
 const moviesApiService = new MoviesApiService();
 const openModalDescription = document.querySelector('.collection__list');
+const openModalDescriptionLibrary = document.querySelector('.collection__list-library');
 const showModal = document.querySelector('[data-modal]');
 const closeBtn = document.querySelector('.modal-close__btn');
 const modalContainer = document.querySelector('.modal-window__content');
 
-
-// function getGenresDataStorage() {
-//   const getValueKeyForGenre = localStorage.getItem("genresItem");
-//     return JSON.parse(getValueKeyForGenre);
-// };
-
-function localStorageFilms(value) {
-  const filmsFromLocalStorage = localStorage.getItem("fetchedMovies")
-  const sortingFilms = JSON.parse(filmsFromLocalStorage);
-  return sortingFilms.map(value => value);
-};
 
 // Підтягування id фільму
 function makeMarkup(data) {
   const markup = `
         <div class="modal-conteiner">
             <div class="modal-container__banner">
-                <img class="modal-container__img" src="https://image.tmdb.org/t/p/w500${data.poster_path}"
+                <img class="modal-container__img" src="https://image.tmdb.org/t/p/w500${data.poster_path}"onerror="this.onerror=null;this.src='https://ih1.redbubble.net/image.3553185369.0580/st,small,507x507-pad,600x600,f8f8f8.jpg'" loading="lazy"
                     alt="Banner of the selected film">
             </div>
             <div class="modal-container__row">
@@ -69,26 +59,46 @@ async function searchedData(id) {
     const data = await moviesApiService.fetchMovieDetails(id);
     const markup = await makeMarkup(data);
     modalContainer.innerHTML = markup;
+
     const addWatchedBtn = document.querySelector('.modal-conteiner__first-btn');
     const addQueueBtn = document.querySelector('.modal-conteiner__second-btn');
 
-    addWatchedBtn.addEventListener('click', ()=>{onAddWatchedClick(data)});
-    addQueueBtn.addEventListener('click', ()=>{onAddQueueClick(data)});
+    addWatchedBtn.addEventListener('click', () => {
+      addEventListener("click", () => {
+        addWatchedBtn.disabled = true;
+        addWatchedBtn.textContent = "ADDED TO WATCHED";
+        addWatchedBtn.classList.add('btn-add__watch');
+        addWachedFilm(buttonObject)
+        // localStorage.setItem("watched", JSON.stringify(buttonObject))
+        onAddWatchedClick(data);
+      })
+    });
+    addQueueBtn.addEventListener('click', () => {
+      addEventListener("click", () => {
+        addQueueBtn.disabled = true;
+        addQueueBtn.classList.add('btn-add__queue');
+        addQueueBtn.textContent = "ADDED TO QUEUE";
+        onAddQueueClick(data);
+      });
+    });
     // removeWatchedBtn.addEventListener('click', ()=>{onRemoveWatchedBtn(data.id)});
     // removeQueueBtn.addEventListener('click', ()=>{onRemoveQueueBtn(data.id)});
-
    
   } catch (error) {
     console.error(error);
   };
 };
 
+function addWachedFilm(data) {
+  storage.setMovie("watched", data);
+};
+
 function onAddWatchedClick(data){
-  storage.setMovie("watched", data)
+  storage.setMovie("watched", data);
 };
 
 function onAddQueueClick(data){
-  storage.setMovie("queue", data)
+  storage.setMovie("queue", data);
 };
   
 // function onRemoveWatchedBtn(id){
@@ -100,6 +110,8 @@ function onAddQueueClick(data){
 
 // Додаємо слухача і відкриваємо модальне вікно при кліку на картку
 openModalDescription.addEventListener('click', onModalClick);
+// openModalDescriptionLibrary.addEventListener('click', onModalClick);
+
 function onModalClick(evt) {
   evt.preventDefault();
   if (evt.target.closest('.card')) {
