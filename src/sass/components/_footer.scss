@@ -58,6 +58,9 @@
     font-style: normal;
     font-weight: 400;
 }
+.footer-text-underline:hover{
+    cursor: pointer;
+}
 .footer-br{
     @media screen  and(max-width:767px) {
         display: flex;
