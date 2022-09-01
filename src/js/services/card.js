@@ -35,13 +35,15 @@ export function appendGallery(data) {
   const markupOneCard = data.results
     .map(movie => {
       const genresMovie = createGenres(movie.genre_ids, genres);
-      const genreRender = '';
+      // console.log(genresMovie);
+      let genreRender = [];
       if (genresMovie.length > 3) {
-        const genreRender = genresMovie.slice(0, 2);
+        genreRender = genresMovie.slice(0, 2);
         genreRender.push('Other');
+        genreRender = genreRender.join(', ');
         console.log('жанри', genreRender);
       } else {
-        const genreRender = genresMovie;
+        genreRender = genresMovie.join(', ');
         console.log('жанри', genreRender);
       }
       return `

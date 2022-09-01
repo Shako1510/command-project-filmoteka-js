@@ -1,75 +1,62 @@
 .collection {
+    background-color: #FFFFFF;
     padding-top: 20px;
     padding-bottom: 40px;
-    width: 320px;
 
     @media screen and (max-width: $tablet) {
         max-width: 480px;
-
     }
-
     @media screen and (min-width: $tablet) {
         padding-bottom: 60px;
         padding-top: 60px;
         width: 768px;
-    }
-
+     }
     @media screen and (min-width: $desktop) {
-
         width: 1280px;
     }
 
     &__list {
         display: flex;
         flex-wrap: wrap;
-        align-items: stretch;
+        margin-right: -32px;
     }
-}
+        // justify-content: flex-start;
+       &__item{
+        margin-right: 32px;
+        margin-bottom: 32px;
+    }}
 
 
-@media screen and (max-width: $tablet) {
-    .card {
-        padding-bottom: 20px;
-        width: 280px;
 
-        &__img {
-            height: 402px;
-        }
-    }
-}
 
-@media screen and (min-width: $tablet) and (max-width: $desktop) {
-    .card {
-        padding-bottom: 32px;
-        width: 336px;
-        margin-right: 16px;
+// @media screen and (min-width: $tablet) and (max-width: $desktop) {
+//     .card {
+//        width: 336px;
+//              &__img {
+//             height: 455px;
+//         }
+//     }
+// }
 
-        &__img {
-            height: 455px;
-        }
-    }
-}
+// @media screen and (min-width: $desktop) {
+//     .card {
+//         padding-bottom: 32px;
+//         width: 395px;
+    
 
-@media screen and (min-width: $desktop) {
-    .card {
-        padding-bottom: 32px;
-        width: 395px;
-        margin-right: 16px;
+//         &__img {
+//             height: 574px;
+//         }
 
-        &__img {
-            height: 574px;
-        }
-
-    }
-}
+//     }
+// }
 
 
 .card {
-
+margin-bottom: 20px;
+        width: 280px;
     box-sizing: border-box;
-    margin-right: 16px;
-    margin-bottom: 16px;
-    height: 100%;
+
     transform: scale(100%);
     border-radius: 5px;
 
@@ -77,24 +64,37 @@
     &:focus {
 
         // box-shadow: (0px 0px 40px 1px #f0ccb3);
-        opacity: 0.9;
-        transform: scale(99%);
+        opacity: 0.8;
+        transform: scale(98%);
         transition: transform 250ms ease;
         z-index: 100;
     }
+        @media screen and (min-width: $tablet) and (max-width: $desktop){
+            width: 336px;
+        }
+        @media screen and (min-width: $desktop) {
+            width: 395px;
+        }
 
-    &__link {
+
+        &__link {
         margin: 0;
-        // cursor: default
-
-    }
+   }
 
     &__img {
         border-radius: 5px;
-
+height: 402px;
+@media screen and (min-width: $tablet) and (max-width: $desktop){
+height: 455px;
+}
+@media screen and (min-width: $desktop){
+height: 574px;
+}
 
 
     }
+                
+
 
     &__title {
         margin-top: 10px;
