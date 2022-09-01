@@ -18,8 +18,13 @@
     &__list {
         display: flex;
         flex-wrap: wrap;
-    //     margin-top: -30px;
-    //    margin-left: -30px;
+            margin-right: -16px;
+                margin-bottom: -32px;
+@media screen and (min-width: $tablet) and (max-width: $desktop){
+    margin-right: -32px;
+}
+
+  
     }
         
        &__item{
@@ -42,8 +47,9 @@
             }
         
             @media screen and (min-width: $tablet) and (max-width: $desktop) {
-            width: calc(100% / 2 - 16px);
-                // width: 336px;
+            // width: calc(100% / 2 - 16px);
+                width: 336px;
+                margin-right: 32px;
             }
         
             @media screen and (min-width: $desktop) {
@@ -68,14 +74,16 @@
 
 .card {
     &__img {
-       max-width: 100%;
+       width: 100%;
         border-radius: 5px;
 height: 402px;
 @media screen and (min-width: $tablet) and (max-width: $desktop){
 height: 455px;
+max-width: 100%;
 }
 @media screen and (min-width: $desktop){
 height: 574px;
+
 }
 
 
