@@ -31,6 +31,7 @@ function createGenres(array, genres) {
 }
 
 export function appendGallery(data) {
+  console.log(data.results);
   clearContainer();
   const markupOneCard = data.results
     .map(movie => {
@@ -41,29 +42,26 @@ export function appendGallery(data) {
         genreRender = genresMovie.slice(0, 2);
         genreRender.push('Other');
         genreRender = genreRender.join(', ');
-        console.log('жанри', genreRender);
       } else {
         genreRender = genresMovie.join(', ');
-        console.log('жанри', genreRender);
       }
+      let date = '';
+      if (movie.release_date) {
+        date = movie.release_date.slice(0, 4);
+      }
+
       return `
             <li class="collection__item">
             <div class="card">
             <a href="" class="card__link" id="${movie.id}">
-          <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${
-            movie.poster_path
-          }"onerror="this.onerror=null;this.src='https://ih1.redbubble.net/image.3553185369.0580/st,small,507x507-pad,600x600,f8f8f8.jpg'" loading="lazy" alt="" >
+          <img class=" card__img" src="https://www.themoviedb.org/t/p/w500/${movie.poster_path}"onerror="this.onerror=null;this.src='https://ih1.redbubble.net/image.3553185369.0580/st,small,507x507-pad,600x600,f8f8f8.jpg'" loading="lazy" alt="" >
           <div class="card__wrap">
              <h2 class="card__title" >${movie.title}</h2>
           <div class="card__data">
        
           <p class="card__genre">${genreRender}</p>
-               
-                  
-        <p class="card__year card__text">&nbsp | ${movie.release_date.slice(
-          0,
-          4
-        )} </p>
+                                
+        <p class="card__year card__text">&nbsp | ${date}</p>
               </div>
     </div></a>
     
