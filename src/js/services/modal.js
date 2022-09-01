@@ -1,4 +1,7 @@
 import MoviesApiService from './moviesAPIService';
+import LocalStorageAPI from './local-storage-api';
+
+const storage = new LocalStorageAPI();
 
 const moviesApiService = new MoviesApiService();
 const openModalDescription = document.querySelector('.collection__list');
@@ -58,19 +61,42 @@ function makeMarkup(data) {
                     <button type="button" class="modal-conteiner__second-btn">add to queue</button>
                 </div>
             </div>`;
-  return modalContainer.innerHTML = markup;
+    return markup;
 };
 
 async function searchedData(id) {
   try {
     const data = await moviesApiService.fetchMovieDetails(id);
     const markup = await makeMarkup(data);
-    return markup;
+    modalContainer.innerHTML = markup;
+    const addWatchedBtn = document.querySelector('.modal-conteiner__first-btn');
+    const addQueueBtn = document.querySelector('.modal-conteiner__second-btn');
 
+    addWatchedBtn.addEventListener('click', ()=>{onAddWatchedClick(data)});
+    addQueueBtn.addEventListener('click', ()=>{onAddQueueClick(data)});
+    // removeWatchedBtn.addEventListener('click', ()=>{onRemoveWatchedBtn(data.id)});
+    // removeQueueBtn.addEventListener('click', ()=>{onRemoveQueueBtn(data.id)});
+
+   
   } catch (error) {
     console.error(error);
   };
 };
+
+function onAddWatchedClick(data){
+  storage.setMovie("watched", data)
+};
+
+function onAddQueueClick(data){
+  storage.setMovie("queue", data)
+};
+  
+// function onRemoveWatchedBtn(id){
+//   storage.removeMovie("watched", id)
+// };
+// function onRemoveQueueBtn(id){
+//   storage.removeMovie("queue", id)
+// };
 
 // Додаємо слухача і відкриваємо модальне вікно при кліку на картку
 openModalDescription.addEventListener('click', onModalClick);
@@ -104,3 +130,4 @@ function onEscKeyPress(evt) {
 };
 // Закриваємо модальне вікно при кліку на кнопку
 closeBtn.addEventListener('click', onModalClose);
+

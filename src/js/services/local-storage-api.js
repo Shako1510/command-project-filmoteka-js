@@ -1,11 +1,9 @@
 
-// import moviesAPIService from './moviesAPIService';
-// const getFilms = new moviesAPIService();
-
 export default class LocalStorageAPI {
 
-  constructor (){
-    
+  constructor() {
+    if (!this.loadData('watched')) this.saveData('watched', new Object([]));
+    if (!this.loadData('queue')) this.saveData('queue', new Object([]));
   }
 
   // Отримання даних за ключем. Повертає дані, або null
@@ -16,41 +14,38 @@ export default class LocalStorageAPI {
 
   // Запис даних до сховища. Записує дані з ключем key
   saveData(key, value) {
-   
     const dataToSave = JSON.stringify(value);
     localStorage.setItem(key, dataToSave);
     return 'ok';
   };
 
   // Отримання колекції фільмів. Повертає масив фільмів, або порожній масив з його попереднім записом до сховища
-  getMovies(key, page) {
+  getMovies(key, page = 1) {
     const movies = this.loadData(key); // отр 
-    const totalPages = this.getTotalPage(movies);
-    const result = {movies: this.getPaginationPage(movies, page), totalPages};
+    const totalPages = this.getTotalPages(movies);
+    console.log(totalPages);
+    const result = {movies: this.getPaginationPage(page, movies), totalPages};
+    console.log(result);
       return result;
   };
   
-
   // Додавання фільмів до колекції. Додає новий елемент до поточної колекції фільмів у сховищі
   setMovie(key, value) {
-
    try {
-    const currentCollection = this.getMovies(key);
+    const currentCollection = this.getMovies(key).movies;
     currentCollection.push(value);
     return this.saveData(key, currentCollection);
     
    } catch (error) {
     console.log(error.name);
     console.log(error.message);
-    
    }
-  
   };
 
-  removeMovie(key, value) {
-    const currentCollection = this.getMovies(key);
-    const indexToRemove = currentCollection.indexOf(value);
-
+  removeMovie(key, id) {
+    const currentCollection = this.getMovies(key).movies;
+    const currentCollectionIds = currentCollection.map(item => item.id);
+    const indexToRemove = currentCollectionIds.indexOf(id);
     if (indexToRemove >= 0) {
       currentCollection.splice(indexToRemove, 1);
       this.saveData(key, currentCollection);
@@ -66,18 +61,15 @@ export default class LocalStorageAPI {
      const perPage = 20;
      let start = (page - 1) * perPage;
      let end = start + perPage;
+     console.log(start, end);
      return array.slice(start, end);
     
     };
     
   createGenres(array){
-
     const genres = this.loadData('genres');
       return array
         .map(id => genres.find(element => element.id === id))
         .map(item => item.name);
   };
 };
-
-
- 
