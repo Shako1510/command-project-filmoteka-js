@@ -33,7 +33,7 @@ function createGenres(array, genres) {
 }
 
 export function appendGallery(data) {
-  console.log(data.results);
+  // console.log(data.results);
   clearContainer();
   const markupOneCard = data.results
     .map(movie => {
