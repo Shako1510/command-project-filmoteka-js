@@ -1,159 +1,112 @@
-a {
-    text-decoration: none;
-}
-
 .collection {
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0 auto;
-
-    @media screen and (min-width: $mobile) {
-        width: 320px;
-    }
+    background-color: #FFFFFF;
+    padding-top: 20px;
+    padding-bottom: 40px;
 
     @media screen and (max-width: $tablet) {
         max-width: 480px;
     }
-
     @media screen and (min-width: $tablet) {
-             padding-left: 32px;
-        padding-right: 32px;
+        padding-bottom: 60px;
+        padding-top: 60px;
         width: 768px;
-    }
-
+     }
     @media screen and (min-width: $desktop) {
-              padding-left: 32px;
-        padding-right: 32px;
-        width: 1300px;
+        width: 1280px;
     }
 
     &__list {
         display: flex;
         flex-wrap: wrap;
-        align-items: stretch;
+        margin-right: -32px;
     }
-}
+        // justify-content: flex-start;
+       &__item{
+        margin-right: 32px;
+        margin-bottom: 32px;
+    }}
 
 
-@media screen and (max-width: $tablet) {
-    .card {
-        width: 280px;
-    }
-}
-
-@media screen and (min-width: $tablet) and (max-width: $desktop) {
-    .card {
-        width: 336px;
-        margin-right: 16px;
-    }
-}
-
-@media screen and (min-width: $desktop) {
-    .card {
-        width: 395px;
-        margin-right: 16px;
-
-    }
-}
 
 
 .card {
+margin-bottom: 20px;
+        width: 280px;
     box-sizing: border-box;
-    margin-right: 16px;
-    margin-bottom: 16px;
-    height: 100%;
 
-  &__link{
-    margin: 0;
-  }
+    transform: scale(100%);
+    border-radius: 5px;
+
+    &:hover,
+    &:focus {
+
+        // box-shadow: (0px 0px 40px 1px #f0ccb3);
+        opacity: 0.8;
+        transform: scale(98%);
+        transition: transform 250ms ease;
+        z-index: 100;
+    }
+        @media screen and (min-width: $tablet) and (max-width: $desktop){
+            width: 336px;
+        }
+        @media screen and (min-width: $desktop) {
+            width: 395px;
+        }
 
 
+        &__link {
+        margin: 0;
+   }
 
     &__img {
-        // width: 395px;
         border-radius: 5px;
-   
-        height: 574px;
-    }
+height: 402px;
+@media screen and (min-width: $tablet) and (max-width: $desktop){
+height: 455px;
+}
+@media screen and (min-width: $desktop){
+height: 574px;
+}
 
-    &__wrap {
-   
-        // line-height: 1.67;
+
     }
+                
+
 
     &__title {
-     font-family: $mainFont;
-     
-            font-style: normal;
-            font-weight: 500;
+        margin-top: 10px;
+
+        font-family: $mainFont;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 1.2;
+        color: #000000;
+
+        @media screen and (min-width: $tablet) {
+            margin-top: 8px;
             font-size: 20px;
-            line-height: 1.2;
-         
-        
-        
-            color: #000000;
-        text-transform: uppercase;
+            text-transform: uppercase;
+        }
+
+        @media screen and (min-width: $desktop) {
+            margin-top: 12px;
+        }
     }
 
     &__data {
         display: flex;
         flex-wrap: wrap;
-    }
-
-    &__genres {
-        display: inline-flex;
-        flex-wrap: wrap;
-        color: $accentColor;
         font-family: $mainFont;
+        font-style: normal;
         font-weight: 500;
         font-size: 12px;
+        line-height: 1.2;
+        color: #FF6B08;
+
+        @media screen and (min-width:$tablet) {
+            font-size: 20px;
+        }
     }
 
 }
-
-
-// opacity: 1;}}
-
-//         // transition: all $transition-duration $timing-function;
-
-//         &:hover,
-//         &:focus {
-//             // box-shadow: (7px -7px 21px $button-header-library);
-//             opacity: 0.9;
-//         }
-//     }
-
-
-
-
-
-//     
-//     }
-
-
-//     &__genre {
-//         margin-right: 5px;
-//     }
-
-//     &__text {
-//         ;
-//     }
-
-//     &__year {
-//         cursor: default;
-//     }
-
-//     &__year--library {
-//         margin-right: 5px;
-//     }
-
-//     &__release {
-//         // margin-left: 5px;
-//         padding: 0 10px;
-//         border-radius: 5px;
-//         background-color: $accent-color;
-//         color: $white-text-color;
-
-//         cursor: default;
-//     }
-// }

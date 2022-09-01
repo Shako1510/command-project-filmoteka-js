@@ -9,6 +9,7 @@ const showModal = document.querySelector('[data-modal]');
 const closeBtn = document.querySelector('.modal-close__btn');
 const modalContainer = document.querySelector('.modal-window__content');
 
+
 // function getGenresDataStorage() {
 //   const getValueKeyForGenre = localStorage.getItem("genresItem");
 //     return JSON.parse(getValueKeyForGenre);
@@ -21,7 +22,7 @@ function localStorageFilms(value) {
 };
 
 // Підтягування id фільму
-function makeMarkup(data) {  
+function makeMarkup(data) {
   const markup = `
         <div class="modal-conteiner">
             <div class="modal-container__banner">
