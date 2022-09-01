@@ -72,4 +72,22 @@ export default class LocalStorageAPI {
         .map(id => genres.find(element => element.id === id))
         .map(item => item.name);
   };
-};
+
+    checkMovie(id) {
+      let isMovieInLocalStorage = 'no';
+      let currentCollection;
+      let currentCollectionIds;
+      currentCollection = this.getMovies('watched').movies;
+      currentCollectionIds = currentCollection.map(item => item.id);
+      if (currentCollectionIds.includes(id)) {
+        isMovieInLocalStorage = 'watched';
+      }
+      currentCollection = this.getMovies('queue').movies;
+      currentCollectionIds = currentCollection.map(item => item.id);
+      if (currentCollectionIds.includes(id)) {
+        isMovieInLocalStorage = 'queue';
+      }
+      return isMovieInLocalStorage;
+    }
+  };
+
