@@ -26,8 +26,8 @@ export default class MoviesApiService {
   }
 
   async fetchMoviesByQuery(query, page = 1) {
-    Notiflix.Loading.standard();
-    Notiflix.Loading.remove(500);
+    // Notiflix.Loading.standard();
+    // Notiflix.Loading.remove(500);
     const movies = await axios.get(
       `${BASE_URL}/3/search/movie?api_key=${API_KEY}&query=${query}&language=en-US&page=${page}&include_adult=false`
     );
