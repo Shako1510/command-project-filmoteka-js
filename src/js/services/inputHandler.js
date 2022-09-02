@@ -1,6 +1,6 @@
 import MoviesApiService from './moviesAPIService';
 import { getQuery } from './card';
-import { Loading } from 'notiflix/build/notiflix-loading-aio';
+// import { Loading } from 'notiflix/build/notiflix-loading-aio';
 
 
 const moviesApiService = new MoviesApiService();
@@ -13,7 +13,7 @@ searchForm.addEventListener('submit', onFormSubmit);
 async function onFormSubmit(e) {
   e.preventDefault();
   notification.classList.add('form-warning--hide');
-  
+
   moviesApiService.searchQuery = e.currentTarget.elements.query.value.trim();
   if (
     moviesApiService.searchQuery === null ||
@@ -22,14 +22,14 @@ async function onFormSubmit(e) {
     return;
   }
   try {
-    
+
     const movieByQuert = await moviesApiService.fetchMoviesByQuery(
       moviesApiService.searchQuery
     );
     if (movieByQuert.results.length === 0) {
       notification.classList.remove('form-warning--hide');
       searchForm.reset();
-      return ;
+      return;
     }
     getQuery(moviesApiService.searchQuery);
   } catch (error) {

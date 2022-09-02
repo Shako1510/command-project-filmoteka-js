@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 
 const API_KEY = 'c82323a9bebf6624949ce9fae3cb7c73';
 const BASE_URL = 'https://api.themoviedb.org';
@@ -29,7 +29,7 @@ export default class MoviesApiService {
     const movies = await axios.get(
       `${BASE_URL}/3/search/movie?api_key=${API_KEY}&query=${query}&language=en-US&page=${page}&include_adult=false`
     );
-    
+
     localStorage.setItem('fetchedMovies', JSON.stringify(movies.data.results));
     const movieByQuert = {
       results: movies.data.results,
@@ -37,7 +37,7 @@ export default class MoviesApiService {
       page: movies.data.page,
     };
     console.log('result', movieByQuert);
-    
+
     return movieByQuert;
   }
 
@@ -72,12 +72,12 @@ export default class MoviesApiService {
     this.query = newQuery;
   }
   async fetchGenres() {
-    
+
     const genres = await axios.get(
       `${BASE_URL}/3/genre/movie/list?api_key=${API_KEY}&language=en-US`
     );
-  
+
     localStorage.setItem('genresItem', JSON.stringify(genres.data.genres));
-    return genres.data ;
+    return genres.data;
   }
 }
