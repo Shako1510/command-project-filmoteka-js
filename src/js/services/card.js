@@ -2,11 +2,15 @@ import MoviesApiService from './moviesAPIService';
 const moviesApiService = new MoviesApiService();
 import { PaginationHandler } from './paginationHandler';
 
-document.addEventListener('DOMContentLoaded', onTrending);
+document.addEventListener('DOMContentLoaded', () => {
+  onTrending();
+});
 
-function onTrending() {
+function onTrending(page = 1) {
+  const pageTrend = page;
+
   moviesApiService.fetchGenres();
-  moviesApiService.fetchTrendingMovies().then(appendGallery);
+  moviesApiService.fetchTrendingMovies(pageTrend).then(appendGallery);
 }
 
 const gallery = document.querySelector('.collection__list');
@@ -85,6 +89,7 @@ function appendGallery(data) {
   //  // adding listener of choosing page by pagination
 
   pagination.addEventListener('pageChanged', onSearchMovie);
+  pagination.addEventListener('pageChanged', onTrending);
 }
 
 function clearContainer() {

@@ -9,17 +9,19 @@ export default class MoviesApiService {
     this.page = 1;
   }
 
-  async fetchTrendingMovies() {
+  async fetchTrendingMovies(page = 1) {
+    console.log(page);
     const movies = await axios.get(
-      `${BASE_URL}/3/trending/movie/week?api_key=${API_KEY}`
+      `${BASE_URL}/3/trending/movie/week?api_key=${API_KEY}&page=${page}`
     );
     localStorage.setItem('fetchedMovies', JSON.stringify(movies.data.results));
 
     const movieByQuert = {
       results: movies.data.results,
-      totalPage: 1,
+      totalPage: movies.data.total_pages,
       page: movies.data.page,
     };
+    console.log(movieByQuert);
     return movieByQuert;
   }
 
