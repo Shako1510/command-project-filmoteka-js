@@ -1,9 +1,6 @@
-import MoviesApiService from './moviesAPIService';
-const moviesApiService = new MoviesApiService();
 
 import LocalStorageAPI from './local-storage-api';
-const LocalStorageAPI = new LocalStorageAPI();
-
+const localStorageAPI = new LocalStorageAPI();
 import { PaginationHandler } from './paginationHandler';
 
 const notification = document.querySelector('.notification'); //
