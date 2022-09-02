@@ -21,7 +21,6 @@ export default class LocalStorageAPI {
   getMovies(key, page = 1) {
     const movies = this.loadData(key); // отр
     const totalPages = this.getTotalPages(movies);
-    console.log('PAGE', page);
     const result = {
       movies: this.getPaginationPage(page, movies),
       page,
@@ -63,7 +62,6 @@ export default class LocalStorageAPI {
     const perPage = 20;
     let start = (page - 1) * perPage;
     let end = start + perPage;
-    console.log(start, end);
     return array.slice(start, end);
   }
 
