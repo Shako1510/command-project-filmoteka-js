@@ -31,6 +31,7 @@ export default class LocalStorageAPI {
 
   // Додавання фільмів до колекції. Додає новий елемент до поточної колекції фільмів у сховищі
   setMovie(key, value) {
+    if (this.checkMovie(value.id) === key) return;
     if (this.checkMovie(value.id) === this.changeKey(key))
       this.removeMovie(this.changeKey(key), value.id);
 
