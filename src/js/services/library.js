@@ -1,4 +1,3 @@
-
 import LocalStorageAPI from './local-storage-api';
 const localStorageAPI = new LocalStorageAPI();
 import { PaginationHandler } from './paginationHandler';
@@ -16,22 +15,6 @@ console.log(watchedFilms);
 const queueFilms = JSON.parse(localStorage.getItem('queue'));
 console.log(queueFilms);
 
-// import btnLibraryHandler from './js/services/buttonLibraryHandler';
-// import { renderDefault } from './js/services/libraryRending';
-// import { functionRender } from './js/services/libraryRending';
-
-// console.log(functionRender)
-
-// const genresList = localStorage.getItem('genresItem');
-// const genres = JSON.parse(genresList);
-// console.log(genres);
-
-// function createGenres(array, genres) {
-//   return array
-//     .map(id => genres.find(element => element.id === id))
-//     .map(item => item.name);
-// }
-
 function functionRender(data) {
   library.innerHTML = '';
 
@@ -39,16 +22,17 @@ function functionRender(data) {
 
   const markupCard = data
     .map(movie => {
-      //   const genresMovie = createGenres(movie.genres, genres);
-      //   console.log(movie.genres);
-      //   let genreRender = [];
-      //   if (genresMovie.length > 3) {
-      //     genreRender = genresMovie.slice(0, 2);
-      //     genreRender.push('Other');
-      //     genreRender = genreRender.join(', ');
-      //   } else {
-      //     genreRender = genresMovie.join(', ');
-      //   }
+      const genreLibrary = movie.genres.map(item => item.name);
+      console.log(genreLibrary);
+
+      let genreRender = [];
+      if (genreLibrary.length > 3) {
+        genreRender = genreLibrary.slice(0, 2);
+        genreRender.push('Other');
+        genreRender = genreRender.join(', ');
+      } else {
+        genreRender = genreLibrary.join(', ');
+      }
 
       let date = '';
       if (movie.release_date) {
@@ -64,7 +48,7 @@ function functionRender(data) {
              <h2 class="card__title" >${movie.title}</h2>
           <div class="card__data">
        
-       
+           <p class="card__genre">${genreRender}</p>
                                 
         <p class="card__year card__text">&nbsp | ${date}</p>
               </div>
@@ -87,11 +71,6 @@ function functionRender(data) {
 
   pagination.addEventListener('pageChanged', onSearchMovie);
 }
-
-// function functionRender(data) {
-//   console.log(data);
-//   console.log('Bogdan renderit ety daty');
-// }
 
 function renderDefault() {
   const notificationText = document.createElement('p');

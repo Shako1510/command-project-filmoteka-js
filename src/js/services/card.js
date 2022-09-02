@@ -32,8 +32,8 @@ function createGenres(array, genres) {
     .map(item => item.name);
 }
 
-export function appendGallery(data) {
-  // console.log(data.results);
+function appendGallery(data) {
+  console.log(data.results);
   clearContainer();
   const markupOneCard = data.results
     .map(movie => {
