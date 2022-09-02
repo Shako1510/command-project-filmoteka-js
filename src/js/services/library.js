@@ -14,7 +14,8 @@ const library = document.querySelector('#library-render');
 //const queueFilms = JSON.parse(localStorage.getItem('queue'));
 
 function functionRender(data) {
-  library.innerHTML = '';
+   library.innerHTML = '';
+  notification.innerHTML = '';
 
   const markupCard = data.movies
     .map(movie => {
@@ -33,6 +34,10 @@ function functionRender(data) {
       if (movie.release_date) {
         date = movie.release_date.slice(0, 4);
       }
+          let vote = '';
+      if (movie.vote_average) {
+        vote = movie.vote_average.toString().slice(0, 3);
+      }
 
       return `
             <li class="collection__item">
@@ -46,11 +51,12 @@ function functionRender(data) {
            <p class="card__genre">${genreRender}</p>
                                 
         <p class="card__year card__text">&nbsp | ${date}</p>
+        <p class="card_vote">${vote}</p>
               </div>
     </div></a>
     
             </div>
-            </li>  
+            </li>
      `;
     })
     .join('');
@@ -68,6 +74,8 @@ function functionRender(data) {
 }
 
 function renderDefault() {
+   library.innerHTML = '';
+  notification.innerHTML = '';
   const notificationText = document.createElement('p');
   notificationText.classList.add('notification-text');
   notificationText.innerHTML = "Oops, you didn't add anything yet...";
@@ -88,7 +96,7 @@ function onButtonClick(page = 1) {
   // e.preventDefault();
   console.log('поменяли кнопку');
   if (WatchedRef.checked) {
-    if (!watchedFilms) {
+    if (watchedFilms.movies.length === 0) {
       console.log('отображаем заглушку');
       renderDefault();
       // викликаємо функцію рендеру заглушки
@@ -97,7 +105,7 @@ function onButtonClick(page = 1) {
       functionRender(watchedFilms);
     }
   } else {
-    if (!queueFilms) {
+    if (queueFilms.movies.length === 0) {
       console.log('отображаем заглушку');
       renderDefault();
       // викликаємо функцію рендеру заглушки
@@ -109,3 +117,10 @@ function onButtonClick(page = 1) {
 }
 
 functionRender(localStorageAPI.getMovies('watched'));
+const watchedFilms = localStorageAPI.getMovies('watched');
+
+  if (watchedFilms.movies.length === 0) {
+        renderDefault();
+      } else {
+       functionRender(watchedFilms);
+      }
