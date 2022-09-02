@@ -10,20 +10,15 @@ const library = document.querySelector('#library-render');
 // localStorage.setItem('queue', JSON.stringify(filmQueue));
 
 // function btnLibraryHandler(functionRender, renderDefault)
-const watchedFilms = JSON.parse(localStorage.getItem('watched'));
-console.log(watchedFilms);
-const queueFilms = JSON.parse(localStorage.getItem('queue'));
-console.log(queueFilms);
+//const watchedFilms = JSON.parse(localStorage.getItem('watched'));
+//const queueFilms = JSON.parse(localStorage.getItem('queue'));
 
 function functionRender(data) {
   library.innerHTML = '';
 
-  console.log(data);
-
-  const markupCard = data
+  const markupCard = data.movies
     .map(movie => {
       const genreLibrary = movie.genres.map(item => item.name);
-      console.log(genreLibrary);
 
       let genreRender = [];
       if (genreLibrary.length > 3) {
@@ -63,13 +58,13 @@ function functionRender(data) {
 
   const pagination = new PaginationHandler(
     data.page,
-    data.totalPage,
+    data.totalPages,
     document.querySelector('.pagination__root')
   );
 
   pagination.initPagination();
 
-  pagination.addEventListener('pageChanged', onSearchMovie);
+  pagination.addEventListener('pageChanged', onButtonClick);
 }
 
 function renderDefault() {
@@ -79,30 +74,38 @@ function renderDefault() {
   notification.appendChild(notificationText);
 }
 
-function btnLibraryHandler(functionRender, renderDefault) {
-  formLibraryRef.addEventListener('change', onButtonClick);
-  function onButtonClick() {
-    // e.preventDefault();
-    console.log('поменяли кнопку');
-    if (WatchedRef.checked) {
-      if (!watchedFilms) {
-        console.log('отображаем заглушку');
-        renderDefault();
-        // викликаємо функцію рендеру заглушки
-      } else {
-        functionRender(watchedFilms);
-        console.log('рендерим watchedFilms', watchedFilms);
-      }
+// function btnLibraryHandler() {
+//   formLibraryRef.addEventListener('change', onButtonClick);
+// }
+
+formLibraryRef.addEventListener('change', () => {
+  onButtonClick();
+});
+
+function onButtonClick(page = 1) {
+  const watchedFilms = localStorageAPI.getMovies('watched', page);
+  const queueFilms = localStorageAPI.getMovies('queue', page);
+  // e.preventDefault();
+  console.log('поменяли кнопку');
+  if (WatchedRef.checked) {
+    if (!watchedFilms) {
+      console.log('отображаем заглушку');
+      renderDefault();
+      // викликаємо функцію рендеру заглушки
     } else {
-      if (!queueFilms) {
-        console.log('отображаем заглушку');
-        renderDefault();
-        // викликаємо функцію рендеру заглушки
-      } else {
-        functionRender(queueFilms);
-        console.log('рендерим queueuFilms', queueFilms);
-      }
+      console.log('рендерим watchedFilms', watchedFilms);
+      functionRender(watchedFilms);
+    }
+  } else {
+    if (!queueFilms) {
+      console.log('отображаем заглушку');
+      renderDefault();
+      // викликаємо функцію рендеру заглушки
+    } else {
+      console.log('рендерим queueuFilms', queueFilms);
+      functionRender(queueFilms);
     }
   }
 }
-btnLibraryHandler(functionRender, renderDefault);
+
+functionRender(localStorageAPI.getMovies('watched'));
