@@ -21,18 +21,19 @@ export default class LocalStorageAPI {
   getMovies(key, page = 1) {
     const movies = this.loadData(key); // отр
     const totalPages = this.getTotalPages(movies);
-    console.log('PAGE', page);
     const result = {
       movies: this.getPaginationPage(page, movies),
       page,
       totalPages,
     };
-    console.log(result);
     return result;
   }
 
   // Додавання фільмів до колекції. Додає новий елемент до поточної колекції фільмів у сховищі
   setMovie(key, value) {
+    if (this.checkMovie(value.id) === this.changeKey(key))
+      this.removeMovie(this.changeKey(key), value.id);
+
     try {
       const currentCollection = this.getMovies(key).movies;
       currentCollection.push(value);
@@ -61,7 +62,6 @@ export default class LocalStorageAPI {
     const perPage = 20;
     let start = (page - 1) * perPage;
     let end = start + perPage;
-    console.log(start, end);
     return array.slice(start, end);
   }
 
@@ -87,5 +87,9 @@ export default class LocalStorageAPI {
       isMovieInLocalStorage = 'queue';
     }
     return isMovieInLocalStorage;
+  }
+
+  changeKey(key) {
+    return key === 'watched' ? 'queue' : 'watched';
   }
 }
