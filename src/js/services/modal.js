@@ -82,16 +82,18 @@ async function searchedData(id) {
         addWatchedBtn.classList.add('btn-add__watch');
         addWachedFilm(buttonObject)
         // localStorage.setItem("watched", JSON.stringify(buttonObject))
-        onAddWatchedClick(data);
+        // onAddWatchedClick(data);
       })
+      onAddWatchedClick(data);
     });
     addQueueBtn.addEventListener('click', () => {
       addEventListener("click", () => {
         addQueueBtn.disabled = true;
         addQueueBtn.classList.add('btn-add__queue');
         addQueueBtn.textContent = "ADDED TO QUEUE";
-        onAddQueueClick(data);
+        // onAddQueueClick(data);
       });
+      onAddQueueClick(data);
     });
 
     // removeWatchedBtn.addEventListener('click', ()=>{onRemoveWatchedBtn(data.id)});
@@ -107,11 +109,11 @@ function addWachedFilm(data) {
 };
 
 function onAddWatchedClick(data) {
-  storage.setMovie("watched", data)
+  storage.setMovie("watched", data);
 };
 
 function onAddQueueClick(data) {
-  storage.setMovie("queue", data)
+  storage.setMovie("queue", data);
 };
 
 // function onRemoveWatchedBtn(id){
