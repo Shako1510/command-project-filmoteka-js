@@ -66,7 +66,6 @@ export class PaginationHandler {
   };
 
   renderPagination() {
-    console.log('render with currentPage: ', this.currentPage);
     this.root.innerHTML = this.markupPagination();
 
     this.arrowLeftElement = this.root.querySelector(
@@ -175,7 +174,8 @@ export class PaginationHandler {
   };
 
   initPagination = () => {
-    if (this.totalPages === 1) return;
+    this.root.innerHTML = '';
+    if (this.totalPages <= 1) return;
 
     this.renderPagination();
     this.currentItem = this.pageItems[this.currentPage];
